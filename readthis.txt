@@ -8,3 +8,5 @@ git commit -m “Add Readme.txt”
 git push
 
 Use get status to see if a pull is needed.
+
+Use get pull to pull down updates from host.
