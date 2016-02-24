@@ -6,3 +6,5 @@ So the Commands you used to do this are
 git add file name
 git commit -m “Add Readme.txt”
 git push
+
+Use get status to see if a pull is needed.
