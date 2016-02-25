@@ -37,7 +37,7 @@ module.exports = function(buzzer) {
   console.log("Server Running on " + port + ".\nLaunch http://localhost:" + port);
   
     require('dns').lookup(require('os').hostname(), function(err, add, fam) {
-    var text = "My IP Address is : " + add + " ** ";
+    var text = "My IP Address is : " + add + " ** " + fam;
     console.log(text);
   });
   
