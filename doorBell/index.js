@@ -5,6 +5,7 @@ var Gpio = require('onoff').Gpio,
 button.watch(function(err, value) {
   if (err) exit();
   buzzer.writeSync(value);
+  console.log("Button pushed, value = " + value);
 });
  
 function exit() {
