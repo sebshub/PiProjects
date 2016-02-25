@@ -29,7 +29,7 @@ module.exports = function(buzzer) {
       });
       response.write('{ "status": true }');
       response.end();
- 
+      console.log("Buzzer activated from Web");
     }
   });
  
