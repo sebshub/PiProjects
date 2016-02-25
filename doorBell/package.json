@@ -1,0 +1,22 @@
+{
+  "name": "doorbell",
+  "version": "1.0.0",
+  "description": "Sample DoorBell app that allows you to ring the bell from a web site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohnRucker/PiProjects.git"
+  },
+  "author": "http://thejackalofjavascript.com/rpi-buzzer-node-iot-doorbell/",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JohnRucker/PiProjects/issues"
+  },
+  "homepage": "https://github.com/JohnRucker/PiProjects#readme",
+  "dependencies": {
+    "onoff": "^1.0.4"
+  }
+}
