@@ -36,7 +36,7 @@
   $(function() {
     $('button').on('click', function() {
        $('button').prop('disabled', true).text('Trigerring');
-      $.get('http://41b9687d.ngrok.com/trigger', function(data) {
+      $.get('http://10.50.111.189:8088/trigger', function(data) {
        $('button').prop('disabled', false).text('Trigger');
       });
     });
