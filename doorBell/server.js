@@ -38,7 +38,7 @@ module.exports = function(buzzer) {
   
     require('dns').lookup(require('os').hostname(), function(err, add, fam) {
     var text = "My IP Address is : " + add + " ** ";
-    Console.log(text);
+    console.log(text);
   });
   
   return server;
