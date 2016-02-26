@@ -23,13 +23,13 @@ prnStr("1234");
 
 function prnStr(varToDisplay){
   console.log("Displaying " + varToDisplay);
-  var charWord = fontLookup.getChar(varToDisplay.charCodeAt(3));
+  var charWord = fontLookup.getChar(varToDisplay.charCodeAt(0));
   i2c1.writeWordSync(HT16K33_ADDR, 0x00, charWord);
-  charWord = fontLookup.getChar(varToDisplay.charCodeAt(2));
-  i2c1.writeWordSync(HT16K33_ADDR, 0x02, charWord);
   charWord = fontLookup.getChar(varToDisplay.charCodeAt(1));
+  i2c1.writeWordSync(HT16K33_ADDR, 0x02, charWord);
+  charWord = fontLookup.getChar(varToDisplay.charCodeAt(2));
   i2c1.writeWordSync(HT16K33_ADDR, 0x04, charWord);  
-  charWord = fontLookup.getChar(varToDisplay.charCodeAt(0));
+  charWord = fontLookup.getChar(varToDisplay.charCodeAt(3));
   i2c1.writeWordSync(HT16K33_ADDR, 0x06, charWord);    
 }
 
