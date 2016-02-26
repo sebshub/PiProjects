@@ -1,0 +1,6 @@
+# to make this file runable type:[chmod 755 FILE_NAME]
+# to run script in current directory type [./FILE_NAME]
+echo "updating files from git"
+git pull
+echo "starting server"
+node index.js
