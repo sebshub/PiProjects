@@ -4,7 +4,7 @@ var http = require('http'), port = 8088;
 
 var server = http.createServer(function(request, response) {
  
-    if (request.url === '/?txtToDisplay' && request.method == 'GET') {
+    if (request.method == 'GET') {
       var cmdStr = request.url;
       var cmdStrArr = cmdStr.split("=");
       if (cmdStrArr[0].includes("txtToDisplay")){
