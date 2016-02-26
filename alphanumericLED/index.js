@@ -11,15 +11,13 @@ console.log("Turning on display's oscillator...")
 i2c1.sendByteSync(HT16K33_ADDR, 0x81);
 console.log("Powering up display...")
 
-var x = "5".charCodeAt(0);
-var charWord = fontLookup.getChar(x);
-console.log("sending 5 (ASCII " + x + ") is > " + charWord);
-i2c1.writeWordSync(HT16K33_ADDR, 0x00, charWord);
-i2c1.writeWordSync(HT16K33_ADDR, 0x02, charWord);
-i2c1.writeWordSync(HT16K33_ADDR, 0x04, charWord);
-i2c1.writeWordSync(HT16K33_ADDR, 0x06, charWord);
+var i = 9999
+while (i > 0){
+  prnStr(i.toString());
+  i--;
+}
 
-prnStr("ABC");
+prnStr("IPL ");
 
 function prnStr(stringToDisplay){
   var xStr = "";
@@ -32,7 +30,6 @@ function prnStr(stringToDisplay){
   } else {
     xStr = stringToDisplay;
   }
-  
   console.log("Displaying ->" + xStr + "<-");
   var charWord = fontLookup.getChar(xStr.charCodeAt(0));
   i2c1.writeWordSync(HT16K33_ADDR, 0x00, charWord);
