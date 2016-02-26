@@ -33,7 +33,7 @@ function prnStr(stringToDisplay){
     xStr = stringToDisplay;
   }
   
-  console.log("Displaying " + varToDisplay);
+  console.log("Displaying ->" + xStr + "<-");
   var charWord = fontLookup.getChar(xStr.charCodeAt(0));
   i2c1.writeWordSync(HT16K33_ADDR, 0x00, charWord);
   charWord = fontLookup.getChar(xStr.charCodeAt(1));
