@@ -4,7 +4,7 @@ var http = require('http'), port = 8088;
 
 var server = http.createServer(function(request, response) {
  
-    if (request.url === '/trigger' && request.method == 'GET') {
+    if (request.url === '/?txtToDisplay' && request.method == 'GET') {
       // turn on the buzzer 
       LED.prnStr("BANG");
  
@@ -21,7 +21,7 @@ var server = http.createServer(function(request, response) {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*"
       });
-      response.write('{ "status": true }');
+      response.write('{ "status": false }');
       response.end();
     }
 })
