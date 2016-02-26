@@ -3,6 +3,10 @@ console.log("Setting up i2c object");
 var i2c = require('i2c-bus'), i2c1 = i2c.openSync(1);
 var HT16K33_ADDR = 0x70;     // Address of HT16K33
 
+var testArray = ["A", "B", "C"]
+
+console.log("This should show a B after arrow -->" + testArray[2])
+
 
 // Turn on system oscillatior
 i2c1.sendByteSync(HT16K33_ADDR, 0x21);
