@@ -5,7 +5,7 @@ var HT16K33_ADDR = 0x70;     // Address of HT16K33
 
 var testArray = ["A", "B", "C"]
 
-console.log("This should show a B after arrow -->" + testArray[2])
+console.log("This should show a B after arrow -->" + testArray[1])
 
 
 // Turn on system oscillatior
