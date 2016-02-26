@@ -19,12 +19,18 @@ i2c1.writeWordSync(HT16K33_ADDR, 0x02, charWord);
 i2c1.writeWordSync(HT16K33_ADDR, 0x04, charWord);
 i2c1.writeWordSync(HT16K33_ADDR, 0x06, charWord);
 
-displayNumber("6");
+prnStr("1234");
 
-function displayNumber(numToDisplay){
-  console.log("Displaying " + numToDisplay);
-  var charWord = fontLookup.getChar(numToDisplay.charCodeAt(0));
-  i2c1.writeWordSync(HT16K33_ADDR, 0x06, charWord);
+function prnStr(varToDisplay){
+  console.log("Displaying " + varToDisplay);
+  var charWord = fontLookup.getChar(varToDisplay.charCodeAt(3));
+  i2c1.writeWordSync(HT16K33_ADDR, 0x00, charWord);
+  charWord = fontLookup.getChar(varToDisplay.charCodeAt(2));
+  i2c1.writeWordSync(HT16K33_ADDR, 0x02, charWord);
+  charWord = fontLookup.getChar(varToDisplay.charCodeAt(1));
+  i2c1.writeWordSync(HT16K33_ADDR, 0x04, charWord);  
+  charWord = fontLookup.getChar(varToDisplay.charCodeAt(0));
+  i2c1.writeWordSync(HT16K33_ADDR, 0x06, charWord);    
 }
 
 i2c1.closeSync();
