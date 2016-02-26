@@ -23,7 +23,7 @@ displayNumber(6);
 
 function displayNumber(numToDisplay){
   console.log("Displaying " + numToDisplay);
-  var charWord = fontLookup.getChar(numToDisplay.cahrCodeAt(0));
+  var charWord = fontLookup.getChar(numToDisplay.charCodeAt(0));
   i2c1.writeWordSync(HT16K33_ADDR, 0x06, charWord);
 }
 
