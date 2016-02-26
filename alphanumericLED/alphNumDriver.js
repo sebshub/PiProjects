@@ -11,13 +11,7 @@ console.log("Turning on display's oscillator...")
 i2c1.sendByteSync(HT16K33_ADDR, 0x81);
 console.log("Powering up display...")
 
-var i = 9999
-while (i > 0){
-  prnStr(i.toString());
-  i--;
-}
-
-prnStr("IPL ");
+prnStr(" OK ");
 
 function prnStr(stringToDisplay){
   var xStr = "";
