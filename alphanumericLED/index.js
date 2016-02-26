@@ -16,7 +16,7 @@ var server = http.createServer(function(request, response) {
       response.end();
  
     } else {
- 
+     console.log("called with: " + request);
       response.writeHeader(200, {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*"
