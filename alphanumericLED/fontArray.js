@@ -1,4 +1,8 @@
 
+exports.getChar = function (indxNum){
+  return parseInt(font[indxNum], 2);
+};
+
 var font = [
 '0000000000000001',     
 '0000000000000010',   
