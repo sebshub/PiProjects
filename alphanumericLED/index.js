@@ -24,7 +24,7 @@ var server = http.createServer(function(request, response) {
       response.write('{ "status": true }');
       response.end();
     }
-}
+})
 
   server.listen(port);
   console.log("Server Running on " + port + ".\nLaunch http://localhost:" + port);
