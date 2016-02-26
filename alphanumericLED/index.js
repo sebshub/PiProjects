@@ -21,15 +21,26 @@ i2c1.writeWordSync(HT16K33_ADDR, 0x06, charWord);
 
 prnStr("ABC");
 
-function prnStr(varToDisplay){
+function prnStr(stringToDisplay){
+  var xStr = "";
+  if (stringToDisplay.length == 1){
+    xStr = "   " + stringToDisplay;
+  } else if (stringToDisplay.length == 2){
+    xStr = "  " + stringToDisplay;
+  } else if (stringToDisplay.length == 3){
+    xStr = " " + stringToDisplay;
+  } else {
+    xStr = stringToDisplay;
+  }
+  
   console.log("Displaying " + varToDisplay);
-  var charWord = fontLookup.getChar(varToDisplay.charCodeAt(0));
+  var charWord = fontLookup.getChar(xStr.charCodeAt(0));
   i2c1.writeWordSync(HT16K33_ADDR, 0x00, charWord);
-  charWord = fontLookup.getChar(varToDisplay.charCodeAt(1));
+  charWord = fontLookup.getChar(xStr.charCodeAt(1));
   i2c1.writeWordSync(HT16K33_ADDR, 0x02, charWord);
-  charWord = fontLookup.getChar(varToDisplay.charCodeAt(2));
+  charWord = fontLookup.getChar(xStr.charCodeAt(2));
   i2c1.writeWordSync(HT16K33_ADDR, 0x04, charWord);  
-  charWord = fontLookup.getChar(varToDisplay.charCodeAt(3));
+  charWord = fontLookup.getChar(xStr.charCodeAt(3));
   i2c1.writeWordSync(HT16K33_ADDR, 0x06, charWord);    
 }
 
