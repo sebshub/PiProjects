@@ -19,7 +19,7 @@ i2c1.writeWordSync(HT16K33_ADDR, 0x02, charWord);
 i2c1.writeWordSync(HT16K33_ADDR, 0x04, charWord);
 i2c1.writeWordSync(HT16K33_ADDR, 0x06, charWord);
 
-prnStr("1234");
+prnStr("ABC");
 
 function prnStr(varToDisplay){
   console.log("Displaying " + varToDisplay);
