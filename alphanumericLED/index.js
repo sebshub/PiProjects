@@ -14,7 +14,7 @@ console.log("Powering up display...")
 
 var x = "5".charCodeAt(0);
 var charWord = fontLookup.getChar(x);
-console.log("sending 5 (ASCII " + x + ") is >" + charWord);")
+console.log("sending 5 (ASCII " + x + ") is >" + charWord);
 i2c1.writeWordSync(HT16K33_ADDR, 0x00, charWord);
 
 i2c1.closeSync();
