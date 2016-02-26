@@ -19,7 +19,7 @@ i2c1.writeWordSync(HT16K33_ADDR, 0x02, charWord);
 i2c1.writeWordSync(HT16K33_ADDR, 0x04, charWord);
 i2c1.writeWordSync(HT16K33_ADDR, 0x06, charWord);
 
-displayNumber(6);
+displayNumber("6");
 
 function displayNumber(numToDisplay){
   console.log("Displaying " + numToDisplay);
