@@ -13,7 +13,7 @@ console.log("Powering up display...")
 
 prnStr(" OK ");
 
-function prnStr(stringToDisplay){
+exports.prnStr = function (stringToDisplay){
   var xStr = "";
   if (stringToDisplay.length == 1){
     xStr = "   " + stringToDisplay;
