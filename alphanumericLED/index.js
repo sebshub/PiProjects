@@ -16,7 +16,7 @@ var server = http.createServer(function(request, response) {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*"
       });
-      //response.write('{ "status": true }');
+      response.write('{ "status": true }');
       response.end();
  
     } else {
