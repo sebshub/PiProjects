@@ -5,8 +5,14 @@ var http = require('http'), port = 8088;
 var server = http.createServer(function(request, response) {
  
     if (request.url === '/?txtToDisplay' && request.method == 'GET') {
-      // turn on the buzzer 
-      LED.prnStr("BANG");
+      var cmdStr = request.url;
+      var cmdStrArr = cmdStr.split("=");
+      if (cmdStrArr[0].includes("txtToDisplay")){
+       LED.prnStr(cmdStrArr[1]);
+      } else {
+       console.log("Err: ->" + cmdStrArr[0] + "<- Not valid command")
+      }
+      
  
       response.writeHeader(200, {
         "Content-Type": "application/json",
