@@ -11,7 +11,7 @@
   <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
  
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via  -->
   <!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -19,29 +19,20 @@
 </head>
  
 <body>
-  <h1 class="text-center">Trigger Doorbell</h1>
+  <h1 class="text-center">Enter Text to Display</h1>
   <br/>
   <br/>
-  <div class="container">
-    <div class="col-md-12">
-      <button type="button" class="btn btn-primary btn-block">Trigger</button>
-    </div>
-  </div>
- 
-  <!-- jQuery -->
-  <script src="http://code.jquery.com/jquery.js"></script>
-  <!-- Bootstrap JavaScript -->
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-  <script type="text/javascript">
-  $(function() {
-    $('button').on('click', function() {
-       $('button').prop('disabled', true).text('Trigerring');
-      $.get('http://10.50.111.189:8088/trigger', function(data) {
-       $('button').prop('disabled', false).text('Trigger');
-      });
-    });
-  })
-  </script>
+  <div class="text-center">
+	<div class="col-md-12">
+  <!-- Start of FORM -->
+<form method="get" action="http://10.50.111.189:8088">
+	Enter 4 charcters to display:<br> 
+	<input type="text" name="txtToDisplay"><br>
+	<input type="submit" value="Submit">
+</form>
+<!-- End of FORM -->
+  
+
 </body>
  
 </html>
