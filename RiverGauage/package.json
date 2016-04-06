@@ -4,7 +4,8 @@
   "description": "Read River data from Us.gov XML file",
   "main": "app.js",
   "dependencies": {
-    "request": "^2.70.0"
+    "request": "^2.70.0",
+    "xml2js": "^0.4.16"
   },
   "devDependencies": {},
   "scripts": {
