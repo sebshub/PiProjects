@@ -1,12 +1,16 @@
 var request = require('request');
 var parseString = require("xml2js").parseString;
-//var LED = require('./alphNumDriver.js');
+var LED = require('./alphNumDriver.js');
 var request = require('request');
 
 
 console.log("Reading river gauge data from internet...");
 
-setInterval(getData(), 5000);
+
+getData();
+
+// Call getData every 15 minutes
+setInterval(function(){getData()}, 300000); // 900,000ms = 15 minutes
 
 function getData(){
     request('http://water.weather.gov/ahps2/hydrograph_to_xml.php?gage=grfi2&output=xml', function (error, response, body) {
@@ -43,7 +47,7 @@ function getData(){
         console.log("7 day forecast levl = " + frcst7DayLvl +", change = " + change7Day.toFixed(2) + " inches, forecast time: " + frcst7DayTime);    
         
         console.log("Sending river level to LED");
-        //LED.prnStr(currentLvl);              
+        LED.prnStr(currentLvl);              
         });
       }
     })
