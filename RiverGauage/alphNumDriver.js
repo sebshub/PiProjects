@@ -55,3 +55,4 @@ function prnFltStr (stringToDisplay){
   charWord = fontLookup.getChar(xStr.charCodeAt(4));
   i2c1.writeWordSync(HT16K33_ADDR, 0x06, charWord);    
 }
+
