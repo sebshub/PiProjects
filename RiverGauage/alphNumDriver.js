@@ -38,3 +38,20 @@ function prnStr (stringToDisplay){
   charWord = fontLookup.getChar(xStr.charCodeAt(3));
   i2c1.writeWordSync(HT16K33_ADDR, 0x06, charWord);    
 }
+
+function prnFltStr (stringToDisplay){
+  var xStr = stringToDisplay;
+
+  console.log("Displaying ->" + xStr + "<-");
+  var charWord = fontLookup.getChar(xStr.charCodeAt(0));
+  i2c1.writeWordSync(HT16K33_ADDR, 0x00, charWord);
+  
+  charWord = fontLookup.getChar(xStr.charCodeAt(1));
+  i2c1.writeWordSync(HT16K33_ADDR, 0x02, charWord);
+  
+  charWord = fontLookup.getChar(xStr.charCodeAt(3));
+  i2c1.writeWordSync(HT16K33_ADDR, 0x04, charWord);
+    
+  charWord = fontLookup.getChar(xStr.charCodeAt(4));
+  i2c1.writeWordSync(HT16K33_ADDR, 0x06, charWord);    
+}
