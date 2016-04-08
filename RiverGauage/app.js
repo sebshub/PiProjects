@@ -1,5 +1,6 @@
 var request = require('request');
 var parseString = require("xml2js").parseString;
+var LED = require('./alphNumDriver.js');
 
 console.log("Reading river gauge data from internet...");
 
