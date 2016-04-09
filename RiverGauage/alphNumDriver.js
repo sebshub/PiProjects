@@ -4,7 +4,6 @@ var HT16K33_ADDR = 0x70;     // Address of HT16K33
 var fontLookup = require('./fontArray.js');
 
 exports.prnStr = prnStr;
-exports.prnFltStr = prnFltStr;
 
 // Turn on system oscillatior
 i2c1.sendByteSync(HT16K33_ADDR, 0x21);
@@ -17,46 +16,6 @@ console.log("Powering up display...")
 prnStr(" OK ");
 
 i2c1.closeSync();
-
-function prnStrOld (stringToDisplay){
-  var xStr = "";
-  if (stringToDisplay.length == 1){
-    xStr = "   " + stringToDisplay;
-  } else if (stringToDisplay.length == 2){
-    xStr = "  " + stringToDisplay;
-  } else if (stringToDisplay.length == 3){
-    xStr = " " + stringToDisplay;
-  } else {
-    xStr = stringToDisplay;
-  }
-  console.log("Displaying ->" + xStr + "<-");
-  var charWord = fontLookup.getChar(xStr.charCodeAt(0));
-  i2c1.writeWordSync(HT16K33_ADDR, 0x00, charWord);
-  charWord = fontLookup.getChar(xStr.charCodeAt(1));
-  i2c1.writeWordSync(HT16K33_ADDR, 0x02, charWord);
-  charWord = fontLookup.getChar(xStr.charCodeAt(2));
-  i2c1.writeWordSync(HT16K33_ADDR, 0x04, charWord);  
-  charWord = fontLookup.getChar(xStr.charCodeAt(3));
-  i2c1.writeWordSync(HT16K33_ADDR, 0x06, charWord);    
-}
-
-function prnFltStr (stringToDisplay){
-  var xStr = stringToDisplay;
-
-  console.log("Displaying ->" + xStr + "<-");
-  var charWord = fontLookup.getChar(xStr.charCodeAt(0));
-  i2c1.writeWordSync(HT16K33_ADDR, 0x00, charWord);
-  
-  charWord = fontLookup.getChar(xStr.charCodeAt(1));
-  charWord = charWord | 0x4000;    // Or with 0x4000 to turn on decimal point
-  i2c1.writeWordSync(HT16K33_ADDR, 0x02, charWord);
-  
-  charWord = fontLookup.getChar(xStr.charCodeAt(3));
-  i2c1.writeWordSync(HT16K33_ADDR, 0x04, charWord);
-    
-  charWord = fontLookup.getChar(xStr.charCodeAt(4));
-  i2c1.writeWordSync(HT16K33_ADDR, 0x06, charWord);    
-}
 
 function prnStr (strIn){
   var dpLocation = -1;
@@ -84,6 +43,7 @@ function prnStr (strIn){
   } else {
     xStr = stringToDisplay;
   }
+  console.log("Called with ->" + strIn + "<-");
   console.log("Displaying ->" + xStr + "<-");
   if (dpLocation != -1){
       console.log("Found decimal point after char #" + dpLocation);
