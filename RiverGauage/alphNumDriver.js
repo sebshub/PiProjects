@@ -18,7 +18,7 @@ prnStr(" OK ");
 
 i2c1.closeSync();
 
-function prnStr (stringToDisplay){
+function prnStrOld (stringToDisplay){
   var xStr = "";
   if (stringToDisplay.length == 1){
     xStr = "   " + stringToDisplay;
@@ -55,6 +55,52 @@ function prnFltStr (stringToDisplay){
   i2c1.writeWordSync(HT16K33_ADDR, 0x04, charWord);
     
   charWord = fontLookup.getChar(xStr.charCodeAt(4));
+  i2c1.writeWordSync(HT16K33_ADDR, 0x06, charWord);    
+}
+
+function prnStr (strIn){
+  var dpLoaction = -1;
+  var stringToDisplay = "";    
+  var x = 0;
+  
+    // Look for decimal point, mark locaiton and pull it out of string
+    while (x < strXs.length){
+        if (strXs.charCodeAt(x) == 46){
+            dpLoaction = x;
+        } else {
+            stringToDisplay = stringToDisplay.concat(strXs.charAt(x)); 
+        }
+        x++;     
+    }        
+  
+  // format string based on size  
+  var xStr = "";
+  if (stringToDisplay.length == 1){
+    xStr = "   " + stringToDisplay;
+  } else if (stringToDisplay.length == 2){
+    xStr = "  " + stringToDisplay;
+  } else if (stringToDisplay.length == 3){
+    xStr = " " + stringToDisplay;
+  } else {
+    xStr = stringToDisplay;
+  }
+  console.log("Displaying ->" + xStr + "<-");
+  
+  // Send charcter string to display one word at a time
+  var charWord = fontLookup.getChar(xStr.charCodeAt(0));
+  if (dpLocation == 0){charWord = charWord | 0x4000; }      // Or with 0x4000 to turn on decimal point
+  i2c1.writeWordSync(HT16K33_ADDR, 0x00, charWord);
+  
+  charWord = fontLookup.getChar(xStr.charCodeAt(1));
+  if (dpLocation == 1){charWord = charWord | 0x4000; }      // Or with 0x4000 to turn on decimal point  
+  i2c1.writeWordSync(HT16K33_ADDR, 0x02, charWord);
+  
+  charWord = fontLookup.getChar(xStr.charCodeAt(2));
+  if (dpLocation == 2){charWord = charWord | 0x4000; }      // Or with 0x4000 to turn on decimal point  
+  i2c1.writeWordSync(HT16K33_ADDR, 0x04, charWord); 
+   
+  charWord = fontLookup.getChar(xStr.charCodeAt(3));
+  if (dpLocation == 3){charWord = charWord | 0x4000; }      // Or with 0x4000 to turn on decimal point  
   i2c1.writeWordSync(HT16K33_ADDR, 0x06, charWord);    
 }
 
