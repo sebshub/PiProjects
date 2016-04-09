@@ -43,8 +43,7 @@ function prnStr (strIn){
   } else {
     xStr = stringToDisplay;
   }
-  console.log("Called with ->" + strIn + "<-");
-  console.log("Displaying ->" + xStr + "<-");
+  console.log("prnStr called with ->" + strIn + "<-, displaying ->" + xStr + "<-");
   if (dpLocation != -1){
       console.log("Found decimal point after char #" + dpLocation);
   } 
