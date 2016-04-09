@@ -59,14 +59,14 @@ function prnFltStr (stringToDisplay){
 }
 
 function prnStr (strIn){
-  var dpLoaction = -1;
+  var dpLocation = -1;
   var stringToDisplay = "";    
   var x = 0;
   
     // Look for decimal point, mark locaiton and pull it out of string
     while (x < strIn.length){
         if (strIn.charCodeAt(x) == 46){
-            dpLoaction = x;
+            dpLocation = x;
         } else {
             stringToDisplay = stringToDisplay.concat(strIn.charAt(x)); 
         }
