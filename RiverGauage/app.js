@@ -49,7 +49,7 @@ function getData(){
         console.log("Sending river level to LED");
         
         var x = Number(currentLvl);
-        LED.prnStr(x.toFixed(1));              
+        LED.prnStr(x.toFixed(2));              
         });
       }
     })
