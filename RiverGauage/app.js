@@ -47,7 +47,9 @@ function getData(){
         console.log("7 day forecast levl = " + frcst7DayLvl +", change = " + change7Day.toFixed(2) + " inches, forecast time: " + frcst7DayTime);    
         
         console.log("Sending river level to LED");
-        LED.prnStr(currentLvl.toFixed(1));              
+        
+        var x = Number(currentLvl);
+        LED.prnStr(x.toFixed(1));              
         });
       }
     })
