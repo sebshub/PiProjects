@@ -43,10 +43,12 @@ function prnStr (strIn){
   } else {
     xStr = stringToDisplay;
   }
-  console.log("prnStr called with ->" + strIn + "<-, displaying ->" + xStr + "<-");
+  
   if (dpLocation != -1){
-      console.log("Found decimal point after char #" + dpLocation);
-  } 
+      console.log("prnStr called with ->" + strIn + "<-, displaying ->" + xStr + "<-, found decimal point after char #" + dpLocation);
+  } else {
+      console.log("prnStr called with ->" + strIn + "<-, displaying ->" + xStr + "<-");    
+  }
   
   // Send charcter string to display one word at a time
   var charWord = fontLookup.getChar(xStr.charCodeAt(0));
