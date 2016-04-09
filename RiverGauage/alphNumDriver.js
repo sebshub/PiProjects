@@ -36,10 +36,13 @@ function prnStr (strIn){
   var xStr = "";
   if (stringToDisplay.length == 1){
     xStr = "   " + stringToDisplay;
+    if (dpLocation != -1){dpLocation = dpLocation + 3};     //Move decimal location based on spaces added
   } else if (stringToDisplay.length == 2){
     xStr = "  " + stringToDisplay;
+    if (dpLocation != -1){dpLocation = dpLocation + 2};     //Move decimal location based on spaces added
   } else if (stringToDisplay.length == 3){
     xStr = " " + stringToDisplay;
+    if (dpLocation != -1){dpLocation = dpLocation + 1};     //Move decimal location based on spaces added
   } else {
     xStr = stringToDisplay;
   }
