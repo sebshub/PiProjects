@@ -86,7 +86,7 @@ function prnStr (strIn){
   }
   console.log("Displaying ->" + xStr + "<-");
   if (dpLocation != -1){
-      console.log("Found decimal point at char #" + dpLocation);
+      console.log("Found decimal point after char #" + dpLocation);
   } 
   
   // Send charcter string to display one word at a time
