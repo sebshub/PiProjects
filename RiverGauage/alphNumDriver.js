@@ -45,9 +45,9 @@ function prnStr (strIn){
   }
   
   if (dpLocation != -1){
-      console.log("prnStr called with ->" + strIn + "<-, displaying ->" + xStr + "<-, found decimal point after char #" + dpLocation);
+      console.log("prnStr called with ->" + strIn + "<-, displaying ->" + xStr + "<- with decimal point after char #" + dpLocation + ".");
   } else {
-      console.log("prnStr called with ->" + strIn + "<-, displaying ->" + xStr + "<-");    
+      console.log("prnStr called with ->" + strIn + "<-, displaying ->" + xStr + "<-.");    
   }
   
   // Send charcter string to display one word at a time
