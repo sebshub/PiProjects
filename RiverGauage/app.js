@@ -50,7 +50,8 @@ function getData(){
         
         var yy = Number(currentLvl);
         var xx = String.fromCharCode(23);
-        LED.prnStr(xx + yy.toFixed(1));              
+        //LED.prnStr(xx + yy.toFixed(1));       
+        LED.prnStr(xx + "16.9");       
         });
       }
     })
