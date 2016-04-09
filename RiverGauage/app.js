@@ -48,8 +48,9 @@ function getData(){
         
         console.log("Sending river level to LED");
         
-        var x = Number(currentLvl);
-        LED.prnStr(x.toFixed(0));              
+        var yy = Number(currentLvl);
+        var xx = String.fromCharCode(23)
+        LED.prnStr(xx + yy.toFixed(1));              
         });
       }
     })
