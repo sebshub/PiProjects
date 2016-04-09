@@ -3,6 +3,7 @@ var parseString = require("xml2js").parseString;
 var LED = require('./alphNumDriver.js');
 var request = require('request');
 
+var lastLevel = 0;
 
 console.log("Reading river gauge data from internet...");
 
@@ -49,9 +50,18 @@ function getData(){
         console.log("Sending river level to LED");
         
         var yy = Number(currentLvl);
-        var xx = String.fromCharCode(17);
+        var xx = " "; 
+        if (yy < lastLevel){
+            lastLevel = yy;
+            xx = String.fromCharCode(17);   // Down Arrow
+        } else if (yy > lastLevel){
+            lastLevel = yy;
+            xx = String.fromCharCode(16);   // Up Arrow
+        } else {
+            xx = " ";
+        }
+        
         xx = xx + yy.toFixed(1);
-        console.log("Sending " + xx);
         LED.prnStr(xx);       
         });
       }
