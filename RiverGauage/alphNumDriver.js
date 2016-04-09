@@ -64,11 +64,11 @@ function prnStr (strIn){
   var x = 0;
   
     // Look for decimal point, mark locaiton and pull it out of string
-    while (x < strXs.length){
-        if (strXs.charCodeAt(x) == 46){
+    while (x < strIn.length){
+        if (strIn.charCodeAt(x) == 46){
             dpLoaction = x;
         } else {
-            stringToDisplay = stringToDisplay.concat(strXs.charAt(x)); 
+            stringToDisplay = stringToDisplay.concat(strIn.charAt(x)); 
         }
         x++;     
     }        
