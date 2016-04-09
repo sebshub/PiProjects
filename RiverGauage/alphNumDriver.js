@@ -48,6 +48,7 @@ function prnFltStr (stringToDisplay){
   i2c1.writeWordSync(HT16K33_ADDR, 0x00, charWord);
   
   charWord = fontLookup.getChar(xStr.charCodeAt(1));
+  charWord = charWord || 0x4000;    // Or with 0x4000 to turn on decimal point
   i2c1.writeWordSync(HT16K33_ADDR, 0x02, charWord);
   
   charWord = fontLookup.getChar(xStr.charCodeAt(3));
