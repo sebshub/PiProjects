@@ -22,7 +22,7 @@ function setBright(intDuty){                // value = 1 to 16 Sets the duty cyc
     var bLvl = 8;
     
     // Turn display on
-    i2c1.sendByteSync(HT16K33_ADDR, 0xEF + bLvl );
+    i2c1.sendByteSync(HT16K33_ADDR, 0xE0 + bLvl );
     console.log("Setting Display to 8")
     
 }
