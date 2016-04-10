@@ -58,6 +58,7 @@ function getData(){
             var x = Number(currentLvl);
             xLvl = x.toFixed(1);
             var xPrefix = " "; 
+            if (lastLevel == 0){lastLevel = xLvl;}      // lastLevel = 0 on first run so set it to current level
             if (xLvl < lastLevel){
                 blkOnNew = 1;
                 lastLevel = xLvl;
