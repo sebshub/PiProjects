@@ -18,12 +18,17 @@ prnStr(" OK ");
 
 i2c1.closeSync();
 
-function setBright(intDuty){                // value = 1 to 16 Sets the duty cycle of display
-    var bLvl = 8;
+function setBright(intDuty){                // integer from 0 (dim) to 16 (bright) Sets the duty cycle of display
+    var bLvl = 16;
+    if (intDuty > -1 && intDuty < 17){
+        bLvl = intDuty;    
+    } else {
+        console.log("setBright called with invalid parameter ->" + intDuty);
+    }
     
-    // Turn display on
-    i2c1.sendByteSync(HT16K33_ADDR, 0xE0);
-    console.log("Setting Display to 8")
+    bLvl = 0xE0 + bLvl;                  // 0xE0 is Dimming register
+    i2c1.sendByteSync(HT16K33_ADDR, 0xE0 );
+    console.log("Setting Display to " + bLvl);
     
 }
 
