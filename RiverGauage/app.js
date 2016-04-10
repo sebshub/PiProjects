@@ -69,8 +69,7 @@ function getData(){
             xPrefix = xPrefix + xLvl;
             LED.prnStr(xPrefix); 
             LED.blinkDisplay(1);  
-        } else {
-            LED.blinkDisplay(0);
+            setTimeout(function(){LED.blinkDisplay(0)}, 60000);                    // Send stop blinking command in 60 seconds
         }
        });}
     })
