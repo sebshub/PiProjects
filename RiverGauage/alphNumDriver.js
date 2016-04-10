@@ -31,7 +31,7 @@ function setBright(intDuty){                // integer from 0 (dim) to 15 (brigh
     }
     
     bLvl = 0xE0 + bLvl;                  // 0xE0 is Dimming register
-    i2c1.sendByteSync(HT16K33_ADDR, 0xE0 );
+    i2c1.sendByteSync(HT16K33_ADDR, bLvl);
     console.log("Setting Display to " + bLvl);
     
 }
