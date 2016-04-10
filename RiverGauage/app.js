@@ -13,7 +13,7 @@ console.log("Reading river gauge data from internet...");
 getData();
 
 // Call getData every 30 minutes
-setInterval(function(){getData()}, 900000); // 900,000ms =  15 minutes
+setInterval(function(){getData()}, 300000); // 900,000ms =  15 minutes
 
 function getData(){
     request('http://water.weather.gov/ahps2/hydrograph_to_xml.php?gage=grfi2&output=xml', function (error, response, body) {

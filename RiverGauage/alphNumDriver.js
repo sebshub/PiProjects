@@ -25,6 +25,18 @@ setBright(15);
 
 i2c1.closeSync();
 
+function blinkDisplay(intRate){             // intRate from 0 (no blinking) to 3 (fast blinking)
+    var bRate = 0;
+    if(intRate > -1 && intRate < 4){
+        bRate = intRate;   
+    } else {
+        console.log("blinkDisplay called with invalid parameter ->" + intRate);        
+    }
+    
+   // stopped here bRate 
+    
+}
+
 function setBright(intDuty){                // integer from 0 (dim) to 15 (bright) Sets the duty cycle of display
     var bLvl = 15;
     if (intDuty > -1 && intDuty < 16){
