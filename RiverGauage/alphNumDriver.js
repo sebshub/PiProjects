@@ -18,13 +18,13 @@ console.log("Powering up display...")
 prnStr(" OK ");
 
 // Set to max bright
-setBright(16);
+setBright(15);
 
 i2c1.closeSync();
 
-function setBright(intDuty){                // integer from 0 (dim) to 16 (bright) Sets the duty cycle of display
-    var bLvl = 16;
-    if (intDuty > -1 && intDuty < 17){
+function setBright(intDuty){                // integer from 0 (dim) to 15 (bright) Sets the duty cycle of display
+    var bLvl = 15;
+    if (intDuty > -1 && intDuty < 16){
         bLvl = intDuty;    
     } else {
         console.log("setBright called with invalid parameter ->" + intDuty);
