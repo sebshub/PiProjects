@@ -62,7 +62,8 @@ function getData(){
         }
         
         xx = xx + yy.toFixed(1);
-        LED.prnStr(xx);       
+        LED.prnStr(xx);   
+        LED.setBright(8);    
         });
       }
     })
