@@ -4,6 +4,7 @@ var HT16K33_ADDR = 0x70;     // Address of HT16K33
 var fontLookup = require('./fontArray.js');
 
 exports.prnStr = prnStr;
+exports.setBright = setBright;
 
 // Turn on system oscillatior
 i2c1.sendByteSync(HT16K33_ADDR, 0x21);
@@ -17,7 +18,17 @@ prnStr(" OK ");
 
 i2c1.closeSync();
 
-function prnStr (strIn){
+function setBright(intDuty){                // value = 1 to 16 Sets the duty cycle of display
+    var bLvl = 8;
+    
+    // Turn display on
+    i2c1.sendByteSync(HT16K33_ADDR, 0xEF + bLvl );
+    console.log("Setting Display to 8")
+    
+}
+
+
+function prnStr (strIn){                    // Prints string with decimal point support
   var dpLocation = -1;
   var stringToDisplay = "";    
   var x = 0;
