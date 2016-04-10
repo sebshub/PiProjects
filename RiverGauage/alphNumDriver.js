@@ -14,7 +14,11 @@ console.log("Turning on display's oscillator...")
 i2c1.sendByteSync(HT16K33_ADDR, 0x81);
 console.log("Powering up display...")
 
+// Display OK
 prnStr(" OK ");
+
+// Set to max bright
+setBright(16);
 
 i2c1.closeSync();
 
