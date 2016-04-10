@@ -3,18 +3,17 @@ var parseString = require("xml2js").parseString;
 var LED = require('./alphNumDriver.js');
 var request = require('request');
 
+// Global Vars
 var lastLevel = 0;
 var lastLevelTime;
 
-LED.setBright(7); 
+LED.setBright(0); 
 
 console.log("Reading river gauge data from internet...");
-
-
 getData();
 
 // Call getData every 30 minutes
-setInterval(function(){getData()}, 300000); // 900,000ms =  15 minutes
+setInterval(function(){getData()}, 900000); // 900,000ms =  15 minutes
 
 function getData(){
     request('http://water.weather.gov/ahps2/hydrograph_to_xml.php?gage=grfi2&output=xml', function (error, response, body) {
@@ -76,7 +75,6 @@ function getData(){
                 LED.blinkDisplay(1);  
                 setTimeout(function(){LED.blinkDisplay(0)}, 5000);                    // Send stop blinking command in 5 seconds
             }
-
         }
        });}
     })
