@@ -8,6 +8,7 @@ var dsplyBlink = 0;                         // 0 = No blinking
 
 exports.prnStr = prnStr;
 exports.setBright = setBright;
+exports.blinkDisplay = blinkDisplay;
 
 // Turn on system oscillatior
 i2c1.sendByteSync(HT16K33_ADDR, 0x21);
@@ -33,8 +34,11 @@ function blinkDisplay(intRate){             // intRate from 0 (no blinking) to 3
         console.log("blinkDisplay called with invalid parameter ->" + intRate);        
     }
     
-   // stopped here bRate 
-    
+    dsplyBlink = bRate << 1                 // Shift bits one to left into displyBlink global
+    bRate = dsplyBlink | dsplyOnOff;        // OR with dsplyOnOff global to get value to send to register
+    bRate = 0x80 + bRate;                   // 0x80 is OnOff and Blinking register address
+    i2c1.sendByteSync(HT16K33_ADDR, bRate);
+    console.log("Setting Blink to " + bRate);    
 }
 
 function setBright(intDuty){                // integer from 0 (dim) to 15 (bright) Sets the duty cycle of display
@@ -47,8 +51,7 @@ function setBright(intDuty){                // integer from 0 (dim) to 15 (brigh
     
     bLvl = 0xE0 + bLvl;                     // 0xE0 is Dimming register
     i2c1.sendByteSync(HT16K33_ADDR, bLvl);
-    console.log("Setting Display to " + bLvl);
-    
+    console.log("Setting Display to " + bLvl);  
 }
 
 function prnStr (strIn){                    // Prints string with decimal point support

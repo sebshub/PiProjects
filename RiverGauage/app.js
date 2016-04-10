@@ -7,6 +7,7 @@ var lastLevel = 0;
 var lastLevelTime;
 
 LED.setBright(7); 
+
 console.log("Reading river gauge data from internet...");
 
 
@@ -49,8 +50,6 @@ function getData(){
         console.log("48 hr forecast levl = " + frcst2DayLvl +", change = " + change2Day.toFixed(2) + " inches, forecast time: " + frcst2DayTime);
         console.log("7 day forecast levl = " + frcst7DayLvl +", change = " + change7Day.toFixed(2) + " inches, forecast time: " + frcst7DayTime);    
         
-        console.log("Sending river level to LED");
-        
         var timeOfThisReading = currentLvlTime.toLocaleTimeString();
         if (timeOfThisReading != lastLevelTime){
             lastLevelTime = timeOfThisReading;
@@ -68,7 +67,10 @@ function getData(){
                 xPrefix = " ";
             }
             xPrefix = xPrefix + xLvl;
-            LED.prnStr(xPrefix);   
+            LED.prnStr(xPrefix); 
+            LED.blinkDisplay(1);  
+        } else {
+            LED.blinkDisplay(0);
         }
        });}
     })
