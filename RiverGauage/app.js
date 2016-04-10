@@ -4,7 +4,9 @@ var LED = require('./alphNumDriver.js');
 var request = require('request');
 
 var lastLevel = 0;
+var lastLevelTime;
 
+LED.setBright(7); 
 console.log("Reading river gauge data from internet...");
 
 
@@ -49,22 +51,25 @@ function getData(){
         
         console.log("Sending river level to LED");
         
-        var yy = Number(currentLvl);
-        var xx = " "; 
-        if (yy < lastLevel){
-            lastLevel = yy;
-            xx = String.fromCharCode(17);   // Down Arrow
-        } else if (yy > lastLevel){
-            lastLevel = yy;
-            xx = String.fromCharCode(16);   // Up Arrow
-        } else {
-            xx = " ";
+        var timeOfThisReading = currentLvlTime.toLocaleTimeString();
+        if (timeOfThisReading != lastLevelTime){
+            lastLevelTime = timeOfThisReading;
+            // check if number has increased of decreased
+            var x = Number(currentLvl);
+            xLvl = x.toFixed(1);
+            var xPrefix = " "; 
+            if (xLvl < lastLevel){
+                lastLevel = xLvl;
+                xPrefix = String.fromCharCode(17);   // Down Arrow
+            } else if (xLvl > lastLevel){
+                lastLevel = xLvl;
+                xPrefix = String.fromCharCode(16);   // Up Arrow
+            } else {
+                xPrefix = " ";
+            }
+            xPrefix = xPrefix + xLvl;
+            LED.prnStr(xPrefix);   
         }
-        
-        xx = xx + yy.toFixed(1);
-        LED.prnStr(xx);   
-        LED.setBright(0);    
-        });
-      }
+       });}
     })
 }
