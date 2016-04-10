@@ -54,13 +54,16 @@ function getData(){
         if (timeOfThisReading != lastLevelTime){
             lastLevelTime = timeOfThisReading;
             // check if number has increased of decreased
+            var blkOnNew = 0;
             var x = Number(currentLvl);
             xLvl = x.toFixed(1);
             var xPrefix = " "; 
             if (xLvl < lastLevel){
+                blkOnNew = 1;
                 lastLevel = xLvl;
                 xPrefix = String.fromCharCode(17);   // Down Arrow
             } else if (xLvl > lastLevel){
+                blkOnNew = 1;
                 lastLevel = xLvl;
                 xPrefix = String.fromCharCode(16);   // Up Arrow
             } else {
@@ -68,8 +71,11 @@ function getData(){
             }
             xPrefix = xPrefix + xLvl;
             LED.prnStr(xPrefix); 
-            LED.blinkDisplay(1);  
-            setTimeout(function(){LED.blinkDisplay(0)}, 60000);                    // Send stop blinking command in 60 seconds
+            if (blkOnNew == 1){
+                LED.blinkDisplay(1);  
+                setTimeout(function(){LED.blinkDisplay(0)}, 5000);                    // Send stop blinking command in 5 seconds
+            }
+
         }
        });}
     })
