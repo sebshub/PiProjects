@@ -1,5 +1,8 @@
 var rpio = require('rpio');
 
+var maxCalibration = process.argv[2];
+console.log("called with maxCalibration = " + maxCalibration);
+
 var pin = 12;           /* P12/GPIO18 */
 var range = 1024;       /* LEDs can quickly hit max brightness, so only use */
 var max = 256;          /*   the bottom 8th of a larger scale */
@@ -17,7 +20,7 @@ rpio.open(pin, rpio.PWM);
 rpio.pwmSetClockDivider(clockdiv);
 rpio.pwmSetRange(pin, range);
 
-rpio.pwmSetData(pin, 512);
+rpio.pwmSetData(pin, 700);
 
 /*
  * Repeatedly pulse from low to high and back again until times runs out.
