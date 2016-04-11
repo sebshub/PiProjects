@@ -1,45 +1,24 @@
 var rpio = require('rpio');
+var arg2 = process.argv[2];
+if (arg2){console.log("called with maxCalibrated = " + arg2);}
 
-var maxCalibration = process.argv[2];
-console.log("called with maxCalibration = " + maxCalibration);
 
 var pin = 12;           /* P12/GPIO18 */
-var range = 1024;       /* LEDs can quickly hit max brightness, so only use */
-var max = 256;          /*   the bottom 8th of a larger scale */
+var MaxPossibeRange = 1024;       /* LEDs can quickly hit max brightness, so only use */
 var clockdiv = 8;       /* Clock divider (PWM refresh rate), 8 == 2.4MHz */
-var interval = 5;       /* setInterval timer, speed of pulses */
-var times = 5;          /* How many times to pulse before exiting */
 
-/*
- * Enable PWM on the chosen pin and set the clock and range.
- */
+var maxCalibrated = 512
+if (arg2 > 0 & arg2 < MaxPossibeRange){
+    maxCalibrated = arg2;
+}
 
 console.log("Setting up rpio.");
-
 rpio.open(pin, rpio.PWM);
 rpio.pwmSetClockDivider(clockdiv);
 rpio.pwmSetRange(pin, range);
 
-rpio.pwmSetData(pin, 700);
 
-/*
- * Repeatedly pulse from low to high and back again until times runs out.
- 
-var direction = 1;
-var data = 0;
-var pulse = setInterval(function() {
-        rpio.pwmSetData(pin, data);
-        if (data === 0) {
-                direction = 1;
-                if (times-- === 0) {
-                        clearInterval(pulse);
-                        rpio.open(pin, rpio.INPUT);
-                        return;
-                }
-        } else if (data === max) {
-                direction = -1;
-        }
-        data += direction;
-}, interval, data, direction, times);
+console.log("Setting needel to " + maxCalibrated);
 
-*/
+rpio.pwmSetData(pin, maxCalibrated);
+
