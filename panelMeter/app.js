@@ -17,7 +17,7 @@ rpio.open(pin, rpio.PWM);
 rpio.pwmSetClockDivider(clockdiv);
 rpio.pwmSetRange(pin, range);
 
-rpio.pwmSetData(pin, 1024);
+rpio.pwmSetData(pin, 50);
 
 /*
  * Repeatedly pulse from low to high and back again until times runs out.
