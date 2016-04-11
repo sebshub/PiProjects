@@ -17,9 +17,11 @@ rpio.open(pin, rpio.PWM);
 rpio.pwmSetClockDivider(clockdiv);
 rpio.pwmSetRange(pin, range);
 
+rpio.pwmSetData(pin, 1024);
+
 /*
  * Repeatedly pulse from low to high and back again until times runs out.
- */
+ 
 var direction = 1;
 var data = 0;
 var pulse = setInterval(function() {
@@ -36,3 +38,5 @@ var pulse = setInterval(function() {
         }
         data += direction;
 }, interval, data, direction, times);
+
+*/
