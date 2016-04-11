@@ -7,6 +7,31 @@ var clockdiv = 8;       /* Clock divider (PWM refresh rate), 8 == 2.4MHz */
 var interval = 5;       /* setInterval timer, speed of pulses */
 var times = 5;          /* How many times to pulse before exiting */
 
+
+
+  var prompt = require('prompt');
+
+  //
+  // Start the prompt
+  //
+  prompt.start();
+
+  //
+  // Get two properties from the user: username and email
+  //
+  prompt.get(['username', 'email'], function (err, result) {
+    //
+    // Log the results.
+    //
+    console.log('Command-line input received:');
+    console.log('  username: ' + result.username);
+    console.log('  email: ' + result.email);
+  });
+
+
+
+
+
 /*
  * Enable PWM on the chosen pin and set the clock and range.
  */
