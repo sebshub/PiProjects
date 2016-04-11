@@ -1,5 +1,5 @@
 var rpio = require('rpio');
-var arg2 = number(process.argv[2]);
+var arg2 = Number(process.argv[2]);
 if (arg2){console.log("called with maxCalibrated = " + arg2);}
 
 
