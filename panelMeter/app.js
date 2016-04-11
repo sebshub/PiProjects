@@ -15,8 +15,8 @@ if (arg3){range = arg3;}
 
 console.log("Setting up rpio.");
 rpio.open(pin, rpio.PWM);
-//rpio.pwmSetClockDivider(clockdiv);
-//rpio.pwmSetRange(pin, range);
+rpio.pwmSetClockDivider(clockdiv);
+rpio.pwmSetRange(pin, range);
 
 
 console.log("Setting needel to " + maxCalibrated);
