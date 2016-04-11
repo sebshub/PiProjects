@@ -10,7 +10,7 @@ var range = 100;               /* LEDs can quickly hit max brightness, so only u
 var clockdiv = 2048;               /* Clock divider (PWM refresh rate), 8 == 2.4MHz */
 
 var maxCalibrated = 85;
-if (arg2 > 0 & arg2 < range){maxCalibrated = arg2;}
+if (arg2){maxCalibrated = arg2;}
 if (arg3){range = arg3;}
 
 console.log("Setting up rpio.");
