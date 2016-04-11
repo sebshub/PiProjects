@@ -6,7 +6,7 @@ if (arg2){console.log("called with maxCalibrated = " + arg2);}
 if (arg3){console.log("called with range = " + arg3);}
 
 var pin = 12;                   /* P12/GPIO18 */
-var range = 100;               /* LEDs can quickly hit max brightness, so only use */
+var range = 2048;               /* LEDs can quickly hit max brightness, so only use */
 var clockdiv = 2;               /* Clock divider (PWM refresh rate), 8 == 2.4MHz */
 
 var maxCalibrated = 85;
