@@ -1,5 +1,5 @@
 var rpio = require('rpio');
-var arg2 = process.argv[2];
+var arg2 = number(process.argv[2]);
 if (arg2){console.log("called with maxCalibrated = " + arg2);}
 
 
@@ -8,9 +8,10 @@ var range = 1024;               /* LEDs can quickly hit max brightness, so only 
 var MaxPossibeRange = 1024;     /* LEDs can quickly hit max brightness, so only use */
 var clockdiv = 8;               /* Clock divider (PWM refresh rate), 8 == 2.4MHz */
 
-var maxCalibrated = 512
+var maxCalibrated = 512;
 if (arg2 > 0 & arg2 < MaxPossibeRange){
     maxCalibrated = arg2;
+    
 }
 
 console.log("Setting up rpio.");
