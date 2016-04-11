@@ -10,6 +10,9 @@ var times = 5;          /* How many times to pulse before exiting */
 /*
  * Enable PWM on the chosen pin and set the clock and range.
  */
+
+console.log("Setting up rpio.");
+
 rpio.open(pin, rpio.PWM);
 rpio.pwmSetClockDivider(clockdiv);
 rpio.pwmSetRange(pin, range);
