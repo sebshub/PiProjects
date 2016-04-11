@@ -1,0 +1,30 @@
+{
+  "name": "panelmeter",
+  "version": "1.0.0",
+  "description": "Driver for 50uA analog panel meter",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohnRucker/PiProjects.git"
+  },
+  "keywords": [
+    "panel",
+    "meter",
+    "analog",
+    "meter",
+    "50uA",
+    "meter"
+  ],
+  "author": "John Rucker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JohnRucker/PiProjects/issues"
+  },
+  "homepage": "https://github.com/JohnRucker/PiProjects#readme",
+  "dependencies": {
+    "rpio": "^0.9.10"
+  }
+}
