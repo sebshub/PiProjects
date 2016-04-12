@@ -83,7 +83,7 @@ function getData(){
 }
 
 process.on( 'SIGINT', function() {
-  console.log("\nGracefully shutting down..." );
+  console.log("\nGracefully Shutting Down..." );
   clearInterval(TimedEvt);
   console.log("Timed Events Stopped.");
   pnlMtr1.shutdown();
