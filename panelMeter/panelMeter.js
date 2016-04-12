@@ -28,6 +28,7 @@ if (arg2){
 // Functions
 function setMeter(intVale){
     rpio.pwmSetData(pin, mtr1.getCalibratedPWM(intVale));
+    console.log("setMeter called with " + intValue + ", sent calibrated PWM value " + mtr1.getCalibratedPWM(intVale) + " to pin P" + pin);
 }
 
 function shutdownMeter(){
