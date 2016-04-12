@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/JohnRucker/PiProjects#readme",
   "dependencies": {
-    "rpio": "^0.9.10"
+    "rpio": "^0.9.10",
+    "mtr1": "file:./meterOneCalibration.js"
   }
 }
