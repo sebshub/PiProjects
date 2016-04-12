@@ -91,7 +91,7 @@ process.on( 'SIGINT', function() {
   pnlMtr1.shutdown();
   console.log("Panelmeter shutdown.");
   
-  LED.prnStr("Exit"); 
+  LED.prnStr("EXIT"); 
     console.log("Exit message sent to LED display.");
     
   process.exit( );
