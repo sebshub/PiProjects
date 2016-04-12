@@ -2,6 +2,7 @@ var request = require('request');
 var parseString = require("xml2js").parseString;
 var LED = require('./alphNumDriver.js');
 var request = require('request');
+var pnlMtr1 = require('panelMeter');
 
 // Global Vars
 var lastLevel = 0;
@@ -71,6 +72,7 @@ function getData(){
             }
             xPrefix = xPrefix + xLvl;
             LED.prnStr(xPrefix); 
+            pnlMtr1.setMeter(xlvl);
             if (blkOnNew == 1){
                 LED.blinkDisplay(1);  
                 setTimeout(function(){LED.blinkDisplay(0)}, 5000);                    // Send stop blinking command in 5 seconds
