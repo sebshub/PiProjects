@@ -84,15 +84,11 @@ function getData(){
 
 process.on( 'SIGINT', function() {
   console.log("\nGracefully shutting down..." );
-  
   clearInterval(TimedEvt);
   console.log("Timed Events Stopped.");
-
   pnlMtr1.shutdown();
-  console.log("Panelmeter shutdown.");
-  
+  console.log("Panel Meter is Shutdown.");
   LED.prnStr("EXIT"); 
-    console.log("Exit message sent to LED display.");
-    
+  console.log("Exit message sent to LED display.");
   process.exit( );
 })
