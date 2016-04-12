@@ -2,7 +2,7 @@ var request = require('request');
 var parseString = require("xml2js").parseString;
 var LED = require('./alphNumDriver.js');
 var request = require('request');
-var pnlMtr1 = require('panelMeter');
+var pnlMtr1 = require('panelmeter');
 
 // Global Vars
 var lastLevel = 0;
