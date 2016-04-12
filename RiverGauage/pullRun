@@ -3,4 +3,4 @@
 echo "updating files from git"
 git pull
 echo "starting app.js"
-node sudo app.js
+sudo node app.js
