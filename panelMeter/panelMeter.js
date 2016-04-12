@@ -1,6 +1,5 @@
 // Objects
-//var mtr1 = require('./meterOneCalibration.js');
-var mtr1 = require('mtr1');
+var mtr1 = require('./meterOneCalibration.js');
 var rpio = require('rpio');
 
 // Globals
