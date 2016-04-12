@@ -2,5 +2,5 @@
 # to run script in current directory type [./FILE_NAME]
 echo "updating files from git"
 git pull
-echo "starting server"
-node readGauage.js
+echo "starting app.js"
+node sudo app.js
