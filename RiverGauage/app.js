@@ -72,7 +72,7 @@ function getData(){
             }
             xPrefix = xPrefix + xLvl;
             LED.prnStr(xPrefix); 
-            pnlMtr1.setMeter(xlvl);
+            pnlMtr1.setMeter(xLvl);
             if (blkOnNew == 1){
                 LED.blinkDisplay(1);  
                 setTimeout(function(){LED.blinkDisplay(0)}, 5000);                    // Send stop blinking command in 5 seconds
