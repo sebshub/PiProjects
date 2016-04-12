@@ -2,5 +2,5 @@
 # to run script in current directory type [./FILE_NAME]
 echo "updating files from git"
 git pull
-echo "starting app.js"
-sudo node app.js
+echo "starting panelMeter.js"
+sudo node panelMeter.js
