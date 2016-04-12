@@ -2,7 +2,7 @@
   "name": "panelmeter",
   "version": "1.0.0",
   "description": "Driver for 50uA analog panel meter",
-  "main": "app.js",
+  "main": "panelMeter.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
