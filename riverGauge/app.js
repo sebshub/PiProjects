@@ -16,6 +16,7 @@ var lvlFcst7Day;
 LED.setBright(0); 
 
 console.log("Reading river gauge data from internet...");
+LED.prnStr("WAIT");
 getData();
 
 // Start Timed events
