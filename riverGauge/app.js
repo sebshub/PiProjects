@@ -18,6 +18,8 @@ LED.setBright(0);
 console.log("Reading river gauge data from internet...");
 LED.prnStr("WAIT");
 getData();
+LED.prnStr("1DAY"); 
+pnlMtr1.setPanelMeter(lvlFcst1Day);
 
 // Start Timed events
 var TimedEvt = setInterval(function(){getData()}, 900000);                  // 900,000ms =  15 minutes
