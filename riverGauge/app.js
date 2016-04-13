@@ -8,13 +8,19 @@ var pnlMtr1 = require('panelmeter');
 var lastLevel = 0;
 var lastLevelTime;
 
+var lvlNow;
+var lvlFcst1Day;
+var lvlFcst2Day;
+var lvlFcst7Day;
+
 LED.setBright(0); 
 
 console.log("Reading river gauge data from internet...");
 getData();
 
-// Call getData every 30 minutes
-var TimedEvt = setInterval(function(){getData()}, 900000); // 900,000ms =  15 minutes
+// Start Timed events
+var TimedEvt = setInterval(function(){getData()}, 900000);                  // 900,000ms =  15 minutes
+var TimedUpdates = setInterval(function(){DisplayValues(5)}, 30000);        //update display every 30 seconds 
 
 function getData(){
     request('http://water.weather.gov/ahps2/hydrograph_to_xml.php?gage=grfi2&output=xml', function (error, response, body) {
@@ -41,7 +47,13 @@ function getData(){
                 
         var frcst7DayLvl = result.site.forecast[0].datum[27].primary[0]._;
         var frcst7DayTime = new Date(result.site.forecast[0].datum[27].valid[0]._);   
-        var change7Day = 12 * (Number(frcst7DayLvl) - Number(currentLvl));        // caculate the change in inches              
+        var change7Day = 12 * (Number(frcst7DayLvl) - Number(currentLvl));        // caculate the change in inches     
+        
+        //set Globals
+        lvlNow = currentLvl;
+        lvlFcst1Day = frcst1DayLvl;
+        lvlFcst2Day = frcst2DayLvl;
+        lvlFcst7Day = frcst7DayLvl;      
         
         console.log("Site Name = " + siteName);
         console.log("Site ID = " + siteId);      
@@ -71,8 +83,8 @@ function getData(){
                 xPrefix = " ";
             }
             xPrefix = xPrefix + xLvl;
-            LED.prnStr(xPrefix); 
-            pnlMtr1.setPanelMeter(xLvl);
+            // LED.prnStr(xPrefix); 
+            // pnlMtr1.setPanelMeter(xLvl);
             if (blkOnNew == 1){
                 LED.blinkDisplay(1);  
                 setTimeout(function(){LED.blinkDisplay(0)}, 5000);                    // Send stop blinking command in 5 seconds
@@ -82,9 +94,36 @@ function getData(){
     })
 }
 
+function DisplayValues(changeTime) {
+    var dlay = changeTime * 1000
+
+    LED.prnStr("1DAY"); 
+    pnlMtr1.setPanelMeter(lvlFcst1Day);
+    
+    setTimeout(function(){
+        LED.prnStr("2DAY"); 
+        pnlMtr1.setPanelMeter(lvlFcst2Day);
+    }, dlay);
+    
+    setTimeout(function(){
+        LED.prnStr("7DAY"); 
+        pnlMtr1.setPanelMeter(lvlFcst7Day);
+    }, dlay * 2);
+
+    setTimeout(function(){
+        console.log("NOW");
+        LED.prnStr("NOW"); 
+        pnlMtr1.setPanelMeter(lvlNow);         
+    }, dlay * 3);
+}
+
+
+
+
 process.on( 'SIGINT', function() {
   console.log("\nGracefully Shutting Down..." );
   clearInterval(TimedEvt);
+  clearInterval(TimedUpdates);
   console.log("Timed Events Stopped.");
   pnlMtr1.shutdown();
   console.log("Panel Meter is Shutdown.");
