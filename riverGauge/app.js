@@ -7,7 +7,7 @@ var pnlMtr1 = require('panelmeter');
 // Global Vars
 var lastLevel = 0;
 var lastLevelTime;
-
+var firstRun = 1;
 var lvlNow;
 var lvlFcst1Day;
 var lvlFcst2Day;
@@ -18,8 +18,6 @@ LED.setBright(0);
 console.log("Reading river gauge data from internet...");
 LED.prnStr("WAIT");
 getData();
-LED.prnStr("1DAY"); 
-pnlMtr1.setPanelMeter(lvlFcst1Day);
 
 // Start Timed events
 var TimedEvt = setInterval(function(){getData()}, 900000);                  // 900,000ms =  15 minutes
@@ -92,7 +90,14 @@ function getData(){
                 LED.blinkDisplay(1);  
                 setTimeout(function(){LED.blinkDisplay(0)}, 5000);                    // Send stop blinking command in 5 seconds
             }
+            
+            if (firstRun == 1){                     // Only run this on first run
+                firstRun = 0;
+                LED.prnStr("NOW"); 
+                pnlMtr1.setPanelMeter(lvlNow);    
+            }
         }
+        
        });}
     })
 }
