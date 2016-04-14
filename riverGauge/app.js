@@ -13,7 +13,7 @@ var lvlFcst1Day;
 var lvlFcst2Day;
 var lvlFcst7Day;
 
-LED.setBright(0); 
+LED.setBright(8); 
 
 console.log("Reading river gauge data from internet...");
 LED.prn2Strs("GET ", "DATA");

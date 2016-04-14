@@ -47,6 +47,7 @@ function blinkDisplay(intRate){             // intRate from 0 (no blinking) to 3
     bRate = dsplyBlink | dsplyOnOff;        // OR with dsplyOnOff global to get value to send to register
     bRate = 0x80 + bRate;                   // 0x80 is OnOff and Blinking register address
     i2c1.sendByteSync(AlphNum1_Add, bRate);
+    if(AlphNum2_Add){i2c1.sendByteSync(AlphNum2_Add, bRate);}   // If AlphNum2_ADD not null blink
     console.log("Setting Blink to " + bRate);    
 }
 
