@@ -2,7 +2,7 @@
   "name": "alphanumeric-led",
   "version": "1.0.0",
   "description": "I2C driver for alphanumeric LED driver based on the HT16K33 LED driver",
-  "main": "index.js",
+  "main": "alphNumDriver.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

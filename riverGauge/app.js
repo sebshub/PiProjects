@@ -1,6 +1,6 @@
 var request = require('request');
-var parseString = require("xml2js").parseString;
-var LED = require('./alphNumDriver.js');
+var parseString = require('xml2js').parseString;
+var LED = require('alphanumeric-led');
 var request = require('request');
 var pnlMtr1 = require('panelmeter');
 
