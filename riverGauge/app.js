@@ -140,6 +140,7 @@ process.on( 'SIGINT', function() {
   pnlMtr1.shutdown();
   console.log("Panel Meter is Shutdown.");
   LED.prnStr("EXIT"); 
+  LED.prn2Strs("OFF ", "LINE");
   console.log("Exit message sent to LED display.");
   process.exit( );
 })
