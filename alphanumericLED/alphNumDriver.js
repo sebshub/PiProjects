@@ -8,6 +8,7 @@ var dsplyOnOff = 1;                         // 1 = On
 var dsplyBlink = 0;                         // 0 = No blinking
 
 exports.prnStr = prnStr;
+exports.prn2Strs = prn2Strs;
 exports.setBright = setBright;
 exports.blinkDisplay = blinkDisplay;
 
