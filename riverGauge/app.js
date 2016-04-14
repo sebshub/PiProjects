@@ -107,7 +107,7 @@ function DisplayValues(changeTime) {
     var dlay = changeTime * 1000
 
     //LED.prnStr("1DAY");
-    LED.prn2Strs("1DAY", lvlFcst1Day.toFixed(1)); 
+    LED.prn2Strs("1DAY", lvlFcst1Day.toFixed(1) + "F"); 
     pnlMtr1.setPanelMeter(lvlFcst1Day);
     
     setTimeout(function(){
@@ -137,7 +137,7 @@ process.on( 'SIGINT', function() {
   pnlMtr1.shutdown();
   console.log("Panel Meter is Shutdown.");
   LED.prnStr("EXIT"); 
-  LED.prn2Strs("OFF ", "LINE");
+  LED.prn2Strs("OFF-", "LINE");
   console.log("Exit message sent to LED display.");
   process.exit( );
 })
