@@ -16,7 +16,7 @@ var lvlFcst7Day;
 LED.setBright(0); 
 
 console.log("Reading river gauge data from internet...");
-LED.prnStr("WAIT");
+LED.prn2Strs("GET ", "DATA");
 getData();
 
 // Start Timed events
@@ -128,9 +128,6 @@ function DisplayValues(changeTime) {
         pnlMtr1.setPanelMeter(lvlNow);         
     }, dlay * 3);
 }
-
-
-
 
 process.on( 'SIGINT', function() {
   console.log("\nGracefully Shutting Down..." );
