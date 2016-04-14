@@ -107,7 +107,7 @@ function DisplayValues(changeTime) {
     var dlay = changeTime * 1000
 
     //LED.prnStr("1DAY");
-    LED.prn2Strs("1DAY", lvlFcst1Day.toFixed(1) + "F"); 
+    LED.prn2Strs("1DAY", lvlFcst1Day.toFixed(1) + "'"); 
     pnlMtr1.setPanelMeter(lvlFcst1Day);
     
     setTimeout(function(){
