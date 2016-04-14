@@ -51,10 +51,10 @@ function getData(){
         var change7Day = 12 * (Number(frcst7DayLvl) - Number(currentLvl));        // caculate the change in inches     
         
         //set Globals
-        lvlNow = currentLvl;
-        lvlFcst1Day = frcst1DayLvl;
-        lvlFcst2Day = frcst2DayLvl;
-        lvlFcst7Day = frcst7DayLvl;      
+        lvlNow = Number(currentLvl);
+        lvlFcst1Day = Number(frcst1DayLvl);
+        lvlFcst2Day = Number(frcst2DayLvl);
+        lvlFcst7Day = Number(frcst7DayLvl);      
         
         console.log("Site Name = " + siteName);
         console.log("Site ID = " + siteId);      
@@ -94,7 +94,7 @@ function getData(){
             if (firstRun == 1){                     // Only run this on first run
                 firstRun = 0;
                 //LED.prnStr("NOW");
-                LED.prn2Strs("NOW", lvlNow.toFixed(1)); 
+                LED.prn2Strs("NOW", xPrefix); 
                 pnlMtr1.setPanelMeter(lvlNow);    
             }
         }
