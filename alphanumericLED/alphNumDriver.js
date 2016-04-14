@@ -60,7 +60,7 @@ function setBright(intDuty){                // integer from 0 (dim) to 15 (brigh
     
     bLvl = 0xE0 + bLvl;                     // 0xE0 is Dimming register
     i2c1.sendByteSync(AlphNum1_Add, bLvl);
-        if (AlphNum2_Add){i2c1.sendByteSync(AlphNum2_Add, bLvl);}   // If AlphNum2_ADD not null set bright
+    if(AlphNum2_Add){i2c1.sendByteSync(AlphNum2_Add, bLvl);}   // If AlphNum2_ADD not null set bright
     console.log("Setting Display to " + bLvl);  
 }
 
