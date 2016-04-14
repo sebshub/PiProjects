@@ -112,19 +112,19 @@ function DisplayValues(changeTime) {
     
     setTimeout(function(){
         //LED.prnStr("2DAY"); 
-        LED.prn2Strs("2DAY", lvlFcst2Day.toFixed(1));         
+        LED.prn2Strs("2DAY", lvlFcst2Day.toFixed(1) + "'");         
         pnlMtr1.setPanelMeter(lvlFcst2Day);
     }, dlay);
     
     setTimeout(function(){
         //LED.prnStr("7DAY"); 
-        LED.prn2Strs("7DAY", lvlFcst7Day.toFixed(1)); 
+        LED.prn2Strs("7DAY", lvlFcst7Day.toFixed(1) + "'"); 
         pnlMtr1.setPanelMeter(lvlFcst7Day);
     }, dlay * 2);
 
     setTimeout(function(){
         //LED.prnStr("NOW"); 
-        LED.prn2Strs("NOW", lvlNow.toFixed(1));
+        LED.prn2Strs("NOW", lvlNow.toFixed(1) + "'");
         pnlMtr1.setPanelMeter(lvlNow);         
     }, dlay * 3);
 }
