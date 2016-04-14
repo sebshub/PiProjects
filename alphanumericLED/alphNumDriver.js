@@ -23,8 +23,8 @@ console.log("Powering up display...")
 
 // Display OK
 if (AlphNum2_Add){
-    prnStr(" ON-");
-    //prnStr("LINE");
+    _prnStrs(" ON-", AlphNum1_Add);
+    _prnStrs("LINE", AlphNum2_Add);
 } else {
     prnStr(" OK ");
 }
@@ -62,7 +62,11 @@ function setBright(intDuty){                // integer from 0 (dim) to 15 (brigh
     console.log("Setting Display to " + bLvl);  
 }
 
-function prnStr (strIn){                    // Prints string with decimal point support
+function prnStr (strIn){
+    _prnStrs(strIn, AlphNum1_Add)    
+}
+
+function _prnStrs (strIn, bankAdd){                    // Prints string with decimal point support
     var dpLocation = -1;
     var stringToDisplay = "";    
     var x = 0;
@@ -95,22 +99,22 @@ function prnStr (strIn){                    // Prints string with decimal point 
     // Send charcter string to display one word at a time
     var charWord = fontLookup.getChar(xStr.charCodeAt(0));
     if (dpLocation == 1){charWord = charWord | 0x4000; }      // Or with 0x4000 to turn on decimal point
-    i2c1.writeWordSync(AlphNum1_Add, 0x00, charWord);
+    i2c1.writeWordSync(bankAdd, 0x00, charWord);
     charWord = fontLookup.getChar(xStr.charCodeAt(1));
     if (dpLocation == 2){charWord = charWord | 0x4000; }      // Or with 0x4000 to turn on decimal point  
-    i2c1.writeWordSync(AlphNum1_Add, 0x02, charWord);
+    i2c1.writeWordSync(bankAdd, 0x02, charWord);
     charWord = fontLookup.getChar(xStr.charCodeAt(2));
     if (dpLocation == 3){charWord = charWord | 0x4000; }      // Or with 0x4000 to turn on decimal point  
-    i2c1.writeWordSync(AlphNum1_Add, 0x04, charWord); 
+    i2c1.writeWordSync(bankAdd, 0x04, charWord); 
     charWord = fontLookup.getChar(xStr.charCodeAt(3));
     if (dpLocation == 4){charWord = charWord | 0x4000; }      // Or with 0x4000 to turn on decimal point  
-    i2c1.writeWordSync(AlphNum1_Add, 0x06, charWord);    
+    i2c1.writeWordSync(bankAdd, 0x06, charWord);    
     
     // Log to console
     if (dpLocation != -1){
-        console.log("prnStr called with ->" + strIn + "<-, displaying ->" + xStr + "<- with decimal point after char #" + dpLocation + ".");
+        console.log("_prnStrs called with ->" + strIn + "<-, displaying ->" + xStr + "<- with decimal point after char #" + dpLocation + ". Add = " + bankAdd);
     } else {
-        console.log("prnStr called with ->" + strIn + "<-, displaying ->" + xStr + "<-.");    
+        console.log("_prnStrs called with ->" + strIn + "<-, displaying ->" + xStr + "<-. Add = " + bankAdd);    
     }  
 }
 
