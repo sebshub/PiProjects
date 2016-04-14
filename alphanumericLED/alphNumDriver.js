@@ -1,7 +1,7 @@
 console.log("Setting up i2c object");
 var i2c = require('i2c-bus'), i2c1 = i2c.openSync(1);
-var AlphNum1_Add = 0x70;     // Address of HT16K33
-var AlphNum2_Add = 0x71;     // Address of HT16K33
+var AlphNum1_Add = 0x70;     // Address of first HT16K33 LEDS
+var AlphNum2_Add = 0x71;     // Address of second bank.  Set to null if not attached
 var fontLookup = require('./fontArray.js');
 
 var dsplyOnOff = 1;                         // 1 = On
@@ -23,8 +23,8 @@ console.log("Powering up display...")
 
 // Display OK
 if (AlphNum2_Add){
-    prnstr(" ON-");
-    //prnstr("LINE");
+    prnStr(" ON-");
+    //prnStr("LINE");
 } else {
     prnStr(" OK ");
 }
