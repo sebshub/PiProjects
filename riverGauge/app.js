@@ -93,7 +93,8 @@ function getData(){
             
             if (firstRun == 1){                     // Only run this on first run
                 firstRun = 0;
-                LED.prnStr("NOW"); 
+                //LED.prnStr("NOW");
+                LED.prn2Strs("NOW", lvlNow); 
                 pnlMtr1.setPanelMeter(lvlNow);    
             }
         }
@@ -105,7 +106,8 @@ function getData(){
 function DisplayValues(changeTime) {
     var dlay = changeTime * 1000
 
-    LED.prnStr("1DAY"); 
+    //LED.prnStr("1DAY");
+    LED.prn2Strs("1DAY", lvlFcst1Day); 
     pnlMtr1.setPanelMeter(lvlFcst1Day);
     
     setTimeout(function(){

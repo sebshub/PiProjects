@@ -63,7 +63,12 @@ function setBright(intDuty){                // integer from 0 (dim) to 15 (brigh
 }
 
 function prnStr (strIn){
-    _prnStrs(strIn, AlphNum1_Add)    
+    _prnStrs(strIn, AlphNum1_Add);    
+}
+
+function prn2Strs (strIn1, strIn2){
+    _prnStrs(strIn1, AlphNum1_Add);
+    _prnStrs(strIn2, AlphNum2_Add);        
 }
 
 function _prnStrs (strIn, bankAdd){                    // Prints string with decimal point support
