@@ -81,8 +81,7 @@ function getData(){
             
             // Send values to LED display and panel meter
             LED.prn2Strs(mantissaString, decInches.toFixed(0) + String.fromCharCode(19) + " ");
-            pnlMtr1.setPanelMeter(lvlNow);    
-            
+            pnlMtr1.setPanelMeter(lvlNow);       
         }
         
        });}
