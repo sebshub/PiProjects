@@ -6,7 +6,7 @@ var request = require('request');
 var pnlMtr1 = require('panelmeter');
 
 // Global Vars
-var eventEmitter = new events.eventEmitter();
+var eventEmitter = new events.EventEmitter();
 var lastLevel = 0;
 var lastLevelTime;
 var firstRun = 1;
