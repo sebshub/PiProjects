@@ -23,7 +23,10 @@ if (AlphNum2_Add){i2c1.sendByteSync(AlphNum1_Add, 0x81);}           // If AlphNu
 console.log("Powering up display...")
 
 // Display OK
-if (AlphNum2_Add){
+if (process.argv[2]){
+   _prnStrs(process.argv[2], AlphNum1_Add);
+   if (process.argv[3] & AlphNum2_Add){_prnStrs(process.argv[3], AlphNum2_Add);}
+} else if (AlphNum2_Add){
     _prnStrs(" ON-", AlphNum1_Add);
     _prnStrs("LINE", AlphNum2_Add);
 } else {
