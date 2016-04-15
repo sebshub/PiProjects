@@ -8,7 +8,7 @@ var pnlMtr1 = require('panelmeter');
 // Global Vars
 var eventEmitter = new events.EventEmitter();
 var lastLevel = 0;
-var dfaltViewNum = 0;
+var dfaltViewNum = 4;
 var lastLevelTime;
 var firstRun = 1;
 var lvlNow;
