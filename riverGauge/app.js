@@ -21,7 +21,7 @@ getData();
 
 // Start Timed events
 var TimedEvt = setInterval(function(){getData()}, 900000);                  // 900,000ms =  15 minutes
-var TimedUpdates = setInterval(function(){DisplayValues(5)}, 30000);        //update display every 30 seconds 
+//var TimedUpdates = setInterval(function(){DisplayValues(5)}, 30000);        //update display every 30 seconds 
 
 function getData(){
     request('http://water.weather.gov/ahps2/hydrograph_to_xml.php?gage=grfi2&output=xml', function (error, response, body) {
@@ -95,9 +95,17 @@ function getData(){
                 firstRun = 0;
                 //LED.prnStr("NOW");
                 //LED.prn2Strs("NOW", xPrefix); 
-                var mantissa = Math.floor(lvlNow)
-                var decInches = (lvlNow - mantissa) * 12 
-                LED.prn2Strs(mantissa + String.fromCharCode(18), decInches.toFixed(0) + String.fromCharCode(19) + " ");
+                var mantissa = Math.floor(lvlNow);
+                var decInches = (lvlNow.toFixed(1) - mantissa) * 12;
+                var mantissaString = mantissa + String.fromCharCode(18);
+                var decInchesString = decInches.toFixed(0) + String.fromCharCode(19) + " ";
+                if (mantissa < 10){
+                    mantissaString = " " + mantissaString;      // for small numbers add a space 
+                }
+                if (decInches < 10){
+                    decInchesString = decInchesString + " ";
+                }
+                LED.prn2Strs(mantissaString, decInches.toFixed(0) + String.fromCharCode(19) + " ");
                 pnlMtr1.setPanelMeter(lvlNow);    
             }
         }
