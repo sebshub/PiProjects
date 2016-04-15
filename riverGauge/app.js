@@ -72,6 +72,8 @@ function getData(){
         if (timeOfThisReading != lastLevelTime){
             lastLevelTime = timeOfThisReading;
             eventEmitter.emit('newDataReceived');
+        } else {
+            eventEmitter.emit('DataReceived');
         }
         
        });}
@@ -121,6 +123,8 @@ function displayAllValues(changeTime) {
     }, dlay * 3);
 }
 
+
+// Event handler setup
 function setupEventHandlers(){
     eventEmitter.on('newDataReceived', function(){showRvrLvl();});    
 }
