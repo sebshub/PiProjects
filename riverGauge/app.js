@@ -66,48 +66,22 @@ function getData(){
         var timeOfThisReading = currentLvlTime.toLocaleTimeString();
         if (timeOfThisReading != lastLevelTime){
             lastLevelTime = timeOfThisReading;
-            // check if number has increased of decreased
-            var blkOnNew = 0;
-            var x = Number(currentLvl);
-            xLvl = x.toFixed(1);
-            var xPrefix = " "; 
-            if (lastLevel == 0){lastLevel = xLvl;}      // lastLevel = 0 on first run so set it to current level
-            if (xLvl < lastLevel){
-                blkOnNew = 1;
-                lastLevel = xLvl;
-                xPrefix = String.fromCharCode(17);   // Down Arrow
-            } else if (xLvl > lastLevel){
-                blkOnNew = 1;
-                lastLevel = xLvl;
-                xPrefix = String.fromCharCode(16);   // Up Arrow
-            } else {
-                xPrefix = " ";
+
+            var mantissa = Math.floor(lvlNow);              // get number to left of decimal without rounding
+            var decInches = (lvlNow - mantissa);            // get decimal value
+            decInches = (Math.floor(decInches * 10)) * 1.2; // The first 10's decimal point value 0.987 becomes 9.0 * 1.2 to give inches
+            //decInches = decInches * 1.2;
+            var mantissaString = mantissa + String.fromCharCode(18);
+            var decInchesString = decInches.toFixed(0) + String.fromCharCode(19) + " ";
+            if (mantissa < 10){
+                mantissaString = " " + mantissaString;      // for small numbers add a space 
             }
-            xPrefix = xPrefix + xLvl;
-            // LED.prnStr(xPrefix); 
-            // pnlMtr1.setPanelMeter(xLvl);
-            if (blkOnNew == 1){
-                LED.blinkDisplay(1);  
-                setTimeout(function(){LED.blinkDisplay(0)}, 5000);                    // Send stop blinking command in 5 seconds
+            if (decInches < 10){
+                decInchesString = decInchesString + " ";
             }
+            LED.prn2Strs(mantissaString, decInches.toFixed(0) + String.fromCharCode(19) + " ");
+            pnlMtr1.setPanelMeter(lvlNow);    
             
-            if (firstRun == 1){                     // Only run this on first run
-                firstRun = 0;
-                //LED.prnStr("NOW");
-                //LED.prn2Strs("NOW", xPrefix); 
-                var mantissa = Math.floor(lvlNow);
-                var decInches = (lvlNow.toFixed(1) - mantissa) * 12;
-                var mantissaString = mantissa + String.fromCharCode(18);
-                var decInchesString = decInches.toFixed(0) + String.fromCharCode(19) + " ";
-                if (mantissa < 10){
-                    mantissaString = " " + mantissaString;      // for small numbers add a space 
-                }
-                if (decInches < 10){
-                    decInchesString = decInchesString + " ";
-                }
-                LED.prn2Strs(mantissaString, decInches.toFixed(0) + String.fromCharCode(19) + " ");
-                pnlMtr1.setPanelMeter(lvlNow);    
-            }
         }
         
        });}
