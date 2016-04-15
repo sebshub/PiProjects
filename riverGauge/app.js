@@ -97,7 +97,7 @@ function getData(){
                 //LED.prn2Strs("NOW", xPrefix); 
                 var mantissa = Math.floor(lvlNow)
                 var decInches = (lvlNow - mantissa) * 12 
-                LED.prn2Strs(mantissa + String.fromCharCode(18), decInches + String.fromCharCode(19) + " ");
+                LED.prn2Strs(mantissa + String.fromCharCode(18), decInches.toFixed(0) + String.fromCharCode(19) + " ");
                 pnlMtr1.setPanelMeter(lvlNow);    
             }
         }
