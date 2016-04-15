@@ -1,10 +1,12 @@
 var request = require('request');
+var events = require('events');
 var parseString = require('xml2js').parseString;
 var LED = require('alphanumeric-led');
 var request = require('request');
 var pnlMtr1 = require('panelmeter');
 
 // Global Vars
+var eventEmitter = new events.eventEmitter();
 var lastLevel = 0;
 var lastLevelTime;
 var firstRun = 1;
@@ -12,6 +14,8 @@ var lvlNow;
 var lvlFcst1Day;
 var lvlFcst2Day;
 var lvlFcst7Day;
+
+setupEventHandlers();
 
 LED.setBright(8); 
 
@@ -67,6 +71,7 @@ function getData(){
         var timeOfThisReading = currentLvlTime.toLocaleTimeString();
         if (timeOfThisReading != lastLevelTime){
             lastLevelTime = timeOfThisReading;
+            eventEmitter.emit('data_received');
             
             // Convert river value from feet in fractions to feet and inches
             var mantissa = Math.floor(lvlNow);              // get number to left of decimal without rounding
@@ -113,6 +118,11 @@ function DisplayValues(changeTime) {
         pnlMtr1.setPanelMeter(lvlNow);         
     }, dlay * 3);
 }
+
+function setupEventHandlers(){
+    eventEmitter.on('data_received', function(){console.log('event fired and data received succesfully.');});    
+}
+
 
 process.on( 'SIGINT', function() {
   console.log("\nGracefully Shutting Down..." );
