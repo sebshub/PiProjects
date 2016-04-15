@@ -8,6 +8,7 @@ var pnlMtr1 = require('panelmeter');
 // Global Vars
 var eventEmitter = new events.EventEmitter();
 var lastLevel = 0;
+var dfaltViewNum = 0;
 var lastLevelTime;
 var firstRun = 1;
 var lvlNow;
@@ -80,56 +81,57 @@ function getData(){
     })
 }
 
-function showRvrLvl(){
-    // Convert river value from feet in fractions to feet and inches
-    var mantissa = Math.floor(lvlNow);              // get number to left of decimal without rounding
-    var decInches = (lvlNow - mantissa);            // get decimal value
-    decInches = (Math.floor(decInches * 10)) * 1.2; // The first 10's decimal point value 0.987 becomes 9.0 * 1.2 to give inches
-    var mantissaString = mantissa + String.fromCharCode(18);
-    var decInchesString = decInches.toFixed(0) + String.fromCharCode(19) + " ";
+function showRvrLvl(viewNum){
     
-    // Center numbers in display by adding spaces
-    if (mantissa < 10){mantissaString = " " + mantissaString;}
-    if (decInches < 10){decInchesString = decInchesString + " ";}
-    
-    // Send values to LED display and panel meter
-    LED.prn2Strs(mantissaString, decInches.toFixed(0) + String.fromCharCode(19) + " ");
-    pnlMtr1.setPanelMeter(lvlNow);       
+    switch(viewNum){
+        case 0:     // Display current value in feet and inches
+            // Convert river value from feet in fractions to feet and inches
+            var mantissa = Math.floor(lvlNow);              // get number to left of decimal without rounding
+            var decInches = (lvlNow - mantissa);            // get decimal value
+            decInches = (Math.floor(decInches * 10)) * 1.2; // The first 10's decimal point value 0.987 becomes 9.0 * 1.2 to give inches
+            var mantissaString = mantissa + String.fromCharCode(18);
+            var decInchesString = decInches.toFixed(0) + String.fromCharCode(19) + " ";
+            // Center numbers in display by adding spaces
+            if (mantissa < 10){mantissaString = " " + mantissaString;}
+            if (decInches < 10){decInchesString = decInchesString + " ";}
+            // Send values to LED display and panel meter
+            LED.prn2Strs(mantissaString, decInches.toFixed(0) + String.fromCharCode(19) + " ");
+            pnlMtr1.setPanelMeter(lvlNow);
+            break;
+            
+        case 1:     // Display current value in decimal feet
+            LED.prn2Strs("NOW", lvlNow.toFixed(1) + String.fromCharCode(18));
+            pnlMtr1.setPanelMeter(lvlNow);
+            break;    
+            
+        case 2:     // Display 1 day forecast in decimal feet
+            LED.prn2Strs("1DAY", lvlFcst1Day.toFixed(1) + String.fromCharCode(18)); 
+            pnlMtr1.setPanelMeter(lvlFcst1Day);
+            break;           
+            
+        case 3:     // Display 2 day forecast in decimal feet
+            LED.prn2Strs("2DAY", lvlFcst2Day.toFixed(1) + String.fromCharCode(18)); 
+            pnlMtr1.setPanelMeter(lvlFcst2Day);
+            break;                       
+            
+        case 4:     // Display 7 day forecast in decimal feet
+            LED.prn2Strs("7DAY", lvlFcst7Day.toFixed(1) + String.fromCharCode(18)); 
+            pnlMtr1.setPanelMeter(lvlFcst7Day);
+            break;
+            
+        default:
+            showRvrLvl(0);
+            console.warn("no case match for showRvrLvl, using default.");
+            break;                                
+    }       
 }
-
-function displayAllValues(changeTime) {
-    var dlay = changeTime * 1000
-
-    //LED.prnStr("1DAY");
-    LED.prn2Strs("1DAY", lvlFcst1Day.toFixed(1) + String.fromCharCode(18)); 
-    pnlMtr1.setPanelMeter(lvlFcst1Day);
-    
-    setTimeout(function(){
-        //LED.prnStr("2DAY"); 
-        LED.prn2Strs("2DAY", lvlFcst2Day.toFixed(1) + String.fromCharCode(18));         
-        pnlMtr1.setPanelMeter(lvlFcst2Day);
-    }, dlay);
-    
-    setTimeout(function(){
-        //LED.prnStr("7DAY"); 
-        LED.prn2Strs("7DAY", lvlFcst7Day.toFixed(1) + String.fromCharCode(18)); 
-        pnlMtr1.setPanelMeter(lvlFcst7Day);
-    }, dlay * 2);
-
-    setTimeout(function(){
-        //LED.prnStr("NOW"); 
-        LED.prn2Strs("NOW", lvlNow.toFixed(1) + String.fromCharCode(18));
-        pnlMtr1.setPanelMeter(lvlNow);         
-    }, dlay * 3);
-}
-
 
 // Event handler setup
 function setupEventHandlers(){
-    eventEmitter.on('newDataReceived', function(){showRvrLvl();});    
+    eventEmitter.on('newDataReceived', function(){showRvrLvl(dfaltViewNum);});    
 }
 
-
+// Shutdow process
 process.on( 'SIGINT', function() {
   console.log("\nGracefully Shutting Down..." );
   clearInterval(TimedEvt);
