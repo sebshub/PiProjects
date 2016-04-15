@@ -71,29 +71,31 @@ function getData(){
         var timeOfThisReading = currentLvlTime.toLocaleTimeString();
         if (timeOfThisReading != lastLevelTime){
             lastLevelTime = timeOfThisReading;
-            eventEmitter.emit('data_received');
-            
-            // Convert river value from feet in fractions to feet and inches
-            var mantissa = Math.floor(lvlNow);              // get number to left of decimal without rounding
-            var decInches = (lvlNow - mantissa);            // get decimal value
-            decInches = (Math.floor(decInches * 10)) * 1.2; // The first 10's decimal point value 0.987 becomes 9.0 * 1.2 to give inches
-            var mantissaString = mantissa + String.fromCharCode(18);
-            var decInchesString = decInches.toFixed(0) + String.fromCharCode(19) + " ";
-            
-            // Center numbers in display by adding spaces
-            if (mantissa < 10){mantissaString = " " + mantissaString;}
-            if (decInches < 10){decInchesString = decInchesString + " ";}
-            
-            // Send values to LED display and panel meter
-            LED.prn2Strs(mantissaString, decInches.toFixed(0) + String.fromCharCode(19) + " ");
-            pnlMtr1.setPanelMeter(lvlNow);       
+            eventEmitter.emit('newDataReceived');
         }
         
        });}
     })
 }
 
-function DisplayValues(changeTime) {
+function showRvrLvl(){
+    // Convert river value from feet in fractions to feet and inches
+    var mantissa = Math.floor(lvlNow);              // get number to left of decimal without rounding
+    var decInches = (lvlNow - mantissa);            // get decimal value
+    decInches = (Math.floor(decInches * 10)) * 1.2; // The first 10's decimal point value 0.987 becomes 9.0 * 1.2 to give inches
+    var mantissaString = mantissa + String.fromCharCode(18);
+    var decInchesString = decInches.toFixed(0) + String.fromCharCode(19) + " ";
+    
+    // Center numbers in display by adding spaces
+    if (mantissa < 10){mantissaString = " " + mantissaString;}
+    if (decInches < 10){decInchesString = decInchesString + " ";}
+    
+    // Send values to LED display and panel meter
+    LED.prn2Strs(mantissaString, decInches.toFixed(0) + String.fromCharCode(19) + " ");
+    pnlMtr1.setPanelMeter(lvlNow);       
+}
+
+function displayAllValues(changeTime) {
     var dlay = changeTime * 1000
 
     //LED.prnStr("1DAY");
@@ -120,7 +122,7 @@ function DisplayValues(changeTime) {
 }
 
 function setupEventHandlers(){
-    eventEmitter.on('data_received', function(){console.log('event fired and data received succesfully.');});    
+    eventEmitter.on('newDataReceived', function(){showRvrLvl();});    
 }
 
 
