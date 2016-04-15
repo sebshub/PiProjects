@@ -94,7 +94,8 @@ function getData(){
             if (firstRun == 1){                     // Only run this on first run
                 firstRun = 0;
                 //LED.prnStr("NOW");
-                LED.prn2Strs("NOW", xPrefix); 
+                //LED.prn2Strs("NOW", xPrefix); 
+                LED.prn2Strs(" 16" + String.fromCharCode(18), "11" + String.fromCharCode(19) + " ");
                 pnlMtr1.setPanelMeter(lvlNow);    
             }
         }
@@ -124,8 +125,7 @@ function DisplayValues(changeTime) {
 
     setTimeout(function(){
         //LED.prnStr("NOW"); 
-        //LED.prn2Strs("NOW", lvlNow.toFixed(1));
-        LED.prn2Strs(" 16", String.fromCharCode(18) + "11" + String.fromCharCode(19));
+        LED.prn2Strs("NOW", lvlNow.toFixed(1));
         pnlMtr1.setPanelMeter(lvlNow);         
     }, dlay * 3);
 }
