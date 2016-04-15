@@ -56,6 +56,7 @@ function getData(){
         lvlFcst2Day = Number(frcst2DayLvl);
         lvlFcst7Day = Number(frcst7DayLvl);      
         
+        //log values to screen
         console.log("Site Name = " + siteName);
         console.log("Site ID = " + siteId);      
         console.log("Current river level = " + currentLvl + ", time of reading = " + currentLvlTime.toLocaleTimeString());
@@ -66,19 +67,19 @@ function getData(){
         var timeOfThisReading = currentLvlTime.toLocaleTimeString();
         if (timeOfThisReading != lastLevelTime){
             lastLevelTime = timeOfThisReading;
-
+            
+            // Convert river value from feet in fractions to feet and inches
             var mantissa = Math.floor(lvlNow);              // get number to left of decimal without rounding
             var decInches = (lvlNow - mantissa);            // get decimal value
             decInches = (Math.floor(decInches * 10)) * 1.2; // The first 10's decimal point value 0.987 becomes 9.0 * 1.2 to give inches
-            //decInches = decInches * 1.2;
             var mantissaString = mantissa + String.fromCharCode(18);
             var decInchesString = decInches.toFixed(0) + String.fromCharCode(19) + " ";
-            if (mantissa < 10){
-                mantissaString = " " + mantissaString;      // for small numbers add a space 
-            }
-            if (decInches < 10){
-                decInchesString = decInchesString + " ";
-            }
+            
+            // Center numbers in display by adding spaces
+            if (mantissa < 10){mantissaString = " " + mantissaString;}
+            if (decInches < 10){decInchesString = decInchesString + " ";}
+            
+            // Send values to LED display and panel meter
             LED.prn2Strs(mantissaString, decInches.toFixed(0) + String.fromCharCode(19) + " ");
             pnlMtr1.setPanelMeter(lvlNow);    
             
