@@ -124,7 +124,8 @@ function DisplayValues(changeTime) {
 
     setTimeout(function(){
         //LED.prnStr("NOW"); 
-        LED.prn2Strs("NOW", lvlNow.toFixed(1));
+        //LED.prn2Strs("NOW", lvlNow.toFixed(1));
+        LED.prn2Strs(" 16'", '11"');
         pnlMtr1.setPanelMeter(lvlNow);         
     }, dlay * 3);
 }
