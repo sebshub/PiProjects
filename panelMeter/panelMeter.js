@@ -12,6 +12,7 @@ var clockdiv = 2048;    // Clock divider (PWM refresh rate), 8 == 2.4MHz
 // Exports
 exports.setPanelMeter = setMeter;
 exports.shutdown = shutdownMeter;
+exports.LEDsetOnOff = LEDsetOnOff;
 
 // Setup rpio objects
 console.log("Setting up PWM object on GPIO pin " + pin);
@@ -30,9 +31,6 @@ if (arg2){
     
     console.log("LED = on");
     LEDsetOnOff(1);
-    
-    console.log("Sleeping for 5 seconds");
-    rpio.msleep(5000);
 }
 
 // Functions

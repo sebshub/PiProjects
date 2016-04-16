@@ -29,6 +29,7 @@ var TimedEvt = setInterval(function(){getData()}, 900000);                  // 9
 //var TimedUpdates = setInterval(function(){DisplayValues(5)}, 30000);        //update display every 30 seconds 
 
 function getData(){
+    pnlMtr1.LEDsetOnOff(1);                                                  // turn LED in button on
     request('http://water.weather.gov/ahps2/hydrograph_to_xml.php?gage=grfi2&output=xml', function (error, response, body) {
     if (!error && response.statusCode == 200) {   
         parseString(body, function(error, result){
@@ -76,7 +77,7 @@ function getData(){
         } else {
             eventEmitter.emit('DataReceived');
         }
-        
+        pnlMtr1.LEDsetOnOff(0);                                                     // turn LED off
        });}
     })
 }
