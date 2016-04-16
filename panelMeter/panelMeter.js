@@ -6,6 +6,7 @@ var rpio = require('rpio');
 var arg2 = Number(process.argv[2]);
 var PNLpin = 12;        // P12/GPIO18 (50uA panel meter connected via 56k ohm resistor)
 var LEDpin = 36;        // p36/GPIO 16 (LED connected to 240 ohm resistor)
+var BTNpin = 32;        // p32/GPIO 12 (NO button connected to this pin and ground)
 var range = 500;        // max PWM that can be sent 
 var clockdiv = 2048;    // Clock divider (PWM refresh rate), 8 == 2.4MHz
 
@@ -22,6 +23,9 @@ rpio.pwmSetRange(PNLpin, range);
 
 console.log("Setting up LED output on pin " + LEDpin);
 rpio.open(LEDpin, rpio.OUTPUT, rpio.LOW);
+
+console.log("Setting button input on pin " + BTNpin);
+rpio.open(BTNpin, rpio.INPUT, rpio.PULL_UP);        // setup pin for input use internal pull up resistor
 
 // Demo by calling panelMeter.js object with meter value as argument
 if (arg2){
