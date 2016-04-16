@@ -26,7 +26,6 @@ getData();
 
 // Start Timed events
 var TimedEvt = setInterval(function(){getData()}, 900000);                  // 900,000ms =  15 minutes
-//var TimedUpdates = setInterval(function(){DisplayValues(5)}, 30000);        //update display every 30 seconds 
 
 function getData(){
     pnlMtr1.LEDsetOnOff(1);                                                  // turn LED in button on
@@ -136,7 +135,6 @@ function setupEventHandlers(){
 process.on( 'SIGINT', function() {
   console.log("\nGracefully Shutting Down..." );
   clearInterval(TimedEvt);
-  clearInterval(TimedUpdates);
   console.log("Timed Events Stopped.");
   pnlMtr1.shutdown();
   console.log("Panel Meter is Shutdown.");
