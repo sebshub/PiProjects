@@ -36,12 +36,14 @@ if (arg2){
 // Functions
 function setMeter(intVale){
     rpio.pwmSetData(PNLpin, mtr1.getCalibratedPWM(intVale));
-    console.log("setMeter called with ->" + intVale + "<-, sent PWM value " + mtr1.getCalibratedPWM(intVale) + " to pin P" + pin +".");
+    console.log("setMeter called with ->" + intVale + "<-, sent PWM value " + mtr1.getCalibratedPWM(intVale) + " to pin P" + PNLpin +".");
 }
 
 function shutdownMeter(){
     // Set Pin back to input to stop meter
+    setMeter(0);
     rpio.open(PNLpin, rpio.INPUT);
+    rpio.open(LEDpin, rpio.INPUT);    
 }
 
 function LEDsetOnOff(intOnOff) {
