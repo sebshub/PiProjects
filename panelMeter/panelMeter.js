@@ -4,7 +4,7 @@ var rpio = require('rpio');
 
 // Globals
 var arg2 = Number(process.argv[2]);
-var pin = 12;           // P12/GPIO18 (50uA panel meter connected via 56k ohm resistor)
+var PNLpin = 12;        // P12/GPIO18 (50uA panel meter connected via 56k ohm resistor)
 var LEDpin = 36;        // p36/GPIO 16 (LED connected to 240 ohm resistor)
 var range = 500;        // max PWM that can be sent 
 var clockdiv = 2048;    // Clock divider (PWM refresh rate), 8 == 2.4MHz
@@ -15,10 +15,10 @@ exports.shutdown = shutdownMeter;
 exports.LEDsetOnOff = LEDsetOnOff;
 
 // Setup rpio objects
-console.log("Setting up PWM object on GPIO pin " + pin);
-rpio.open(pin, rpio.PWM);
+console.log("Setting up PWM object on GPIO pin " + PNLpin);
+rpio.open(PNLpin, rpio.PWM);
 rpio.pwmSetClockDivider(clockdiv);
-rpio.pwmSetRange(pin, range);
+rpio.pwmSetRange(PNLpin, range);
 
 console.log("Setting up LED output on pin " + LEDpin);
 rpio.open(LEDpin, rpio.OUTPUT, rpio.LOW);
@@ -35,13 +35,13 @@ if (arg2){
 
 // Functions
 function setMeter(intVale){
-    rpio.pwmSetData(pin, mtr1.getCalibratedPWM(intVale));
+    rpio.pwmSetData(PNLpin, mtr1.getCalibratedPWM(intVale));
     console.log("setMeter called with ->" + intVale + "<-, sent PWM value " + mtr1.getCalibratedPWM(intVale) + " to pin P" + pin +".");
 }
 
 function shutdownMeter(){
     // Set Pin back to input to stop meter
-    rpio.open(pin, rpio.INPUT);
+    rpio.open(PNLpin, rpio.INPUT);
 }
 
 function LEDsetOnOff(intOnOff) {
