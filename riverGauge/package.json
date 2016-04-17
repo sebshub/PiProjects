@@ -5,7 +5,8 @@
   "main": "app.js",
   "dependencies": {
     "request": "^2.70.0",
-    "xml2js": "^0.4.16"
+    "xml2js": "^0.4.16",
+    "rpio": "^0.9.10"
   },
   "devDependencies": {},
   "scripts": {
