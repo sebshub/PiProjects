@@ -17,8 +17,12 @@ var lvlFcst1Day;
 var lvlFcst2Day;
 var lvlFcst7Day;
 var BTNpin = 32;        // p32/GPIO 12 (NO button connected to this pin and ground)
+var LEDpin = 36;        // p36/GPIO 16 (LED connected to 240 ohm resistor)
 
 setupEventHandlers();
+
+console.log("Setting up LED output on pin " + LEDpin);
+rpio.open(LEDpin, rpio.OUTPUT, rpio.LOW);
 
 console.log("Setting button input on pin " + BTNpin);
 rpio.open(BTNpin, rpio.INPUT, rpio.PULL_UP);        // setup pin for input use internal pull up resistor
@@ -34,7 +38,7 @@ getData();
 var TimedEvt = setInterval(function(){getData()}, 900000);                  // 900,000ms =  15 minutes
 
 function getData(){
-    pnlMtr1.LEDsetOnOff(1);                                                  // turn LED in button on
+    LEDsetOnOff(1);                                                         // turn LED in button on
     request('http://water.weather.gov/ahps2/hydrograph_to_xml.php?gage=grfi2&output=xml', function (error, response, body) {
     if (!error && response.statusCode == 200) {   
         parseString(body, function(error, result){
@@ -82,7 +86,7 @@ function getData(){
         } else {
             eventEmitter.emit('DataReceived');
         }
-        pnlMtr1.LEDsetOnOff(0);                                                     // turn LED off
+        LEDsetOnOff(0);                                                         // turn LED off
        });}
     })
 }
@@ -132,19 +136,24 @@ function showRvrLvl(viewNum){
     }       
 }
 
-// Event handler setup
-function setupEventHandlers(){
-    eventEmitter.on('newDataReceived', function(){showRvrLvl(dfaltViewNum);});    
+function LEDsetOnOff(intOnOff) {
+    if (intOnOff == 1){
+        rpio.write(LEDpin, rpio.HIGH);
+    } else {
+        rpio.write(LEDpin, rpio.LOW);
+    }
 }
 
 function pollcb(cbpin)
 {
-
 	buttonState = rpio.read(cbpin) ? 'released':'pressed';   
 	console.log('Button event on P%d (button currently %s)', cbpin, buttonState);
-
 }
 
+// Event handler setup
+function setupEventHandlers(){
+    eventEmitter.on('newDataReceived', function(){showRvrLvl(dfaltViewNum);});    
+}
 
 // Shutdow process
 process.on( 'SIGINT', function() {
