@@ -4,6 +4,7 @@ var parseString = require('xml2js').parseString;
 var LED = require('alphanumeric-led');
 var request = require('request');
 var pnlMtr1 = require('panelmeter');
+var rpio = require('rpio');
 
 // Global Vars
 var eventEmitter = new events.EventEmitter();
@@ -15,8 +16,13 @@ var lvlNow;
 var lvlFcst1Day;
 var lvlFcst2Day;
 var lvlFcst7Day;
+var BTNpin = 32;        // p32/GPIO 12 (NO button connected to this pin and ground)
 
 setupEventHandlers();
+
+console.log("Setting button input on pin " + BTNpin);
+rpio.open(BTNpin, rpio.INPUT, rpio.PULL_UP);        // setup pin for input use internal pull up resistor
+rpio.poll(BTNpin, pollcb);
 
 LED.setBright(8); 
 
@@ -130,6 +136,19 @@ function showRvrLvl(viewNum){
 function setupEventHandlers(){
     eventEmitter.on('newDataReceived', function(){showRvrLvl(dfaltViewNum);});    
 }
+
+function pollcb(cbpin)
+{
+
+	buttonState = rpio.read(cbpin) ? 'released':'pressed';   
+	console.log('Button event on P%d (button currently %s)', cbpin, buttonState);
+    if (buttonState == 'pressed'){
+        LEDsetOnOff(1);
+    } else {
+        LEDsetOnOff(0);
+    }
+}
+
 
 // Shutdow process
 process.on( 'SIGINT', function() {
