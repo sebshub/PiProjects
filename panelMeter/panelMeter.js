@@ -61,7 +61,7 @@ function LEDsetOnOff(intOnOff) {
 
 function pollcb(cbpin)
 {
-	var state = rpio.read(cbpin) ? 'pressed' : 'released';
+	var state = rpio.read(cbpin) ? 'released':'pressed';
 	console.log('Button event on P%d (button currently %s)', cbpin, state);
 	/*
 	 * By default this program will run forever.  If you want to cancel the
