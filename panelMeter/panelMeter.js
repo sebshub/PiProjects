@@ -2,7 +2,6 @@
 // Objects
 var mtr1 = require('./meterOneCalibration.js');
 var rpio = require('rpio');
-var events = require('events');
 
 // Globals
 var arg2 = Number(process.argv[2]);
@@ -11,13 +10,13 @@ var LEDpin = 36;        // p36/GPIO 16 (LED connected to 240 ohm resistor)
 var BTNpin = 32;        // p32/GPIO 12 (NO button connected to this pin and ground)
 var range = 500;        // max PWM that can be sent 
 var clockdiv = 2048;    // Clock divider (PWM refresh rate), 8 == 2.4MHz
-var eventEmitter = new events.EventEmitter();
-var buttonState = 'released';     // When button is pushed and held this will be 'pressed'
+var buttonState = 'unknown';     // When button is pushed and held this will be 'pressed'
 
 // Exports
 exports.setPanelMeter = setMeter;
 exports.shutdown = shutdownMeter;
 exports.LEDsetOnOff = LEDsetOnOff;
+exports.waitForBtnPush = waitForBtnPush;
 
 
 // Setup rpio objects
@@ -43,7 +42,7 @@ if (arg2){
     LEDsetOnOff(1);
 }
 
-// Functions
+// Exported Functions
 function setMeter(intVale){
     rpio.pwmSetData(PNLpin, mtr1.getCalibratedPWM(intVale));
     console.log("setMeter called with ->" + intVale + "<-, sent PWM value " + mtr1.getCalibratedPWM(intVale) + " to pin P" + PNLpin +".");
@@ -64,6 +63,14 @@ function LEDsetOnOff(intOnOff) {
     }
 }
 
+function waitForBtnPush(callback){
+    do {
+        
+    } while (buttonState != 'pressed');
+    callback(null, true);
+}
+
+// Privat functions
 function pollcb(cbpin)
 {
 
@@ -73,12 +80,7 @@ function pollcb(cbpin)
         LEDsetOnOff(1);
     } else {
         LEDsetOnOff(0);
-        eventEmitter.emit('btnReleased');
     }
 }
 
-// Events that can be subscribed to
-function event_btnReleased() {
-    eventEmitter.on('btnReleased', function(){return 'released'})
-}
 
