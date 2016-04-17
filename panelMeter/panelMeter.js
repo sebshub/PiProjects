@@ -26,6 +26,7 @@ rpio.open(LEDpin, rpio.OUTPUT, rpio.LOW);
 
 console.log("Setting button input on pin " + BTNpin);
 rpio.open(BTNpin, rpio.INPUT, rpio.PULL_UP);        // setup pin for input use internal pull up resistor
+rpio.poll(BTNpin, pollcb);
 
 // Demo by calling panelMeter.js object with meter value as argument
 if (arg2){
@@ -56,5 +57,16 @@ function LEDsetOnOff(intOnOff) {
     } else {
         rpio.write(LEDpin, rpio.LOW);
     }
-    
 }
+
+function pollcb(cbpin)
+{
+	var state = rpio.read(cbpin) ? 'pressed' : 'released';
+	console.log('Button event on P%d (button currently %s)', cbpin, state);
+	/*
+	 * By default this program will run forever.  If you want to cancel the
+	 * poll after the first event and end the program, uncomment this line.
+	 */
+	// rpio.poll(cbpin, null);
+}
+
