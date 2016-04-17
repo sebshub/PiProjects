@@ -16,7 +16,6 @@ var buttonState = 'unknown';     // When button is pushed and held this will be 
 exports.setPanelMeter = setMeter;
 exports.shutdown = shutdownMeter;
 exports.LEDsetOnOff = LEDsetOnOff;
-exports.waitForBtnPush = waitForBtnPush;
 
 
 // Setup rpio objects
@@ -28,9 +27,11 @@ rpio.pwmSetRange(PNLpin, range);
 console.log("Setting up LED output on pin " + LEDpin);
 rpio.open(LEDpin, rpio.OUTPUT, rpio.LOW);
 
+/*
 console.log("Setting button input on pin " + BTNpin);
 rpio.open(BTNpin, rpio.INPUT, rpio.PULL_UP);        // setup pin for input use internal pull up resistor
 rpio.poll(BTNpin, pollcb);
+*/
 
 // Demo by calling panelMeter.js object with meter value as argument
 if (arg2){
@@ -63,14 +64,7 @@ function LEDsetOnOff(intOnOff) {
     }
 }
 
-function waitForBtnPush(callback){
-    do {
-        
-    } while (buttonState != 'pressed');
-    callback(null, true);
-}
-
-// Privat functions
+/*
 function pollcb(cbpin)
 {
 
@@ -82,5 +76,6 @@ function pollcb(cbpin)
         LEDsetOnOff(0);
     }
 }
+*/
 
 
