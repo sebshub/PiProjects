@@ -142,11 +142,7 @@ function pollcb(cbpin)
 
 	buttonState = rpio.read(cbpin) ? 'released':'pressed';   
 	console.log('Button event on P%d (button currently %s)', cbpin, buttonState);
-    if (buttonState == 'pressed'){
-        LEDsetOnOff(1);
-    } else {
-        LEDsetOnOff(0);
-    }
+
 }
 
 
