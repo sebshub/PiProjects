@@ -63,10 +63,10 @@ function pollcb(cbpin)
 {
 	var state = rpio.read(cbpin) ? 'released':'pressed';
 	console.log('Button event on P%d (button currently %s)', cbpin, state);
-	/*
-	 * By default this program will run forever.  If you want to cancel the
-	 * poll after the first event and end the program, uncomment this line.
-	 */
-	// rpio.poll(cbpin, null);
+    if (state == 'pressed'){
+        LEDsetOnOff(1);
+    } else {
+        LEDsetOnOff(0);
+    }
 }
 
