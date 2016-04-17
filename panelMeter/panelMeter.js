@@ -1,6 +1,7 @@
 // Objects
 var mtr1 = require('./meterOneCalibration.js');
 var rpio = require('rpio');
+var events = require('events');
 
 // Globals
 var arg2 = Number(process.argv[2]);
@@ -9,6 +10,8 @@ var LEDpin = 36;        // p36/GPIO 16 (LED connected to 240 ohm resistor)
 var BTNpin = 32;        // p32/GPIO 12 (NO button connected to this pin and ground)
 var range = 500;        // max PWM that can be sent 
 var clockdiv = 2048;    // Clock divider (PWM refresh rate), 8 == 2.4MHz
+var eventEmitter = new events.EventEmitter();
+var pushButton = 'released';     // When button is pushed and held this will be 'pressed'
 
 // Exports
 exports.setPanelMeter = setMeter;
@@ -61,7 +64,8 @@ function LEDsetOnOff(intOnOff) {
 
 function pollcb(cbpin)
 {
-	var state = rpio.read(cbpin) ? 'released':'pressed';
+	// var state = rpio.read(cbpin) ? 'released':'pressed';
+	var state = rpio.read(cbpin);    
 	console.log('Button event on P%d (button currently %s)', cbpin, state);
     if (state == 'pressed'){
         LEDsetOnOff(1);
