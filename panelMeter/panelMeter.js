@@ -44,7 +44,6 @@ function setMeter(intVale){
 function shutdownMeter(){
     // Set Pin back to input to stop meter
     setMeter(0);
-    rpio.open(PNLpin, rpio.INPUT);
-    rpio.open(LEDpin, rpio.INPUT);    
+   
 }
 

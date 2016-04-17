@@ -162,7 +162,8 @@ process.on( 'SIGINT', function() {
   console.log("Timed Events Stopped.");
   pnlMtr1.shutdown();
   console.log("Panel Meter is Shutdown.");
-  LED.prnStr("EXIT"); 
+  rpio.open(LEDpin, rpio.INPUT); 
+  console.log("LED pin set to input.");
   LED.prn2Strs("OFF-", "LINE");
   console.log("Exit message sent to LED display.");
   process.exit( );
