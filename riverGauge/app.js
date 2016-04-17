@@ -10,6 +10,7 @@ var rpio = require('rpio');
 var eventEmitter = new events.EventEmitter();
 var lastLevel = 0;
 var dfaltViewNum = 0;
+var dfaltViews = 4;     // The number of default views from 0 to this number
 var lastLevelTime;
 var firstRun = 1;
 var lvlNow;
@@ -148,11 +149,21 @@ function pollcb(cbpin)
 {
 	buttonState = rpio.read(cbpin) ? 'released':'pressed';   
 	console.log('Button event on P%d (button currently %s)', cbpin, buttonState);
+    if(buttonState == 'released'){
+        eventEmitter.emit('newBtnSlectNextView');
+    }
 }
 
 // Event handler setup
 function setupEventHandlers(){
     eventEmitter.on('newDataReceived', function(){showRvrLvl(dfaltViewNum);});    
+    eventEmitter.on('newBtnSlectNextView', function(){
+        dfaltViewNum++;
+        if (dfaltViewNum > dfaltViews){dfaltViewNum = 0;}
+        showRvrLvl(dfaltViewNum);
+    }); 
+    
+    
 }
 
 // Shutdow process
